@@ -63,7 +63,7 @@ namespace System.Resources
 
             if (retAssembly == mainAssembly || (retAssembly == null && throwOnFileNotFound))
             {
-                throw new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, an.Name));
+                // throw new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, an.Name));
             }
 
             return retAssembly;

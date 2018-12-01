@@ -1,10 +1,5 @@
 <Directives>
     <Application>
         <Assembly Name="HelloWorld" Dynamic="Required All" />
-        <Assembly Name="System.ComponentModel.TypeConverter">
-            <Type Name="System.ComponentModel.TypeConverter" Dynamic="Required All" />
-            <Type Name="System.ComponentModel.StringConverter" Dynamic="Required All" />
-            <Type Name="System.ComponentModel.Int32Converter" Dynamic="Required All" />
-        </Assembly>
     </Application>
 </Directives>

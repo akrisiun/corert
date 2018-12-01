@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "HelloWorld": {
+      "commandName": "Executable",
+      "commandLineArgs": "netcoreapp2.1\\HelloWorld.dll",
+      "workingDirectory": "E:\\Beta\\dot64\\corert\\bin"
+    }
+  }
+}

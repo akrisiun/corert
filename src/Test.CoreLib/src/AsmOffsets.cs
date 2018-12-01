@@ -68,21 +68,7 @@ internal const int OFFSETOF__CallDescrData__pTarget = 0x20;
 internal const int OFFSETOF__CallDescrData__pReturnBuffer = 0x28;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
@@ -147,90 +133,25 @@ internal const int OFFSETOF__REGDISPLAY__pR15 = 0x70;
 internal const int OFFSETOF__REGDISPLAY__Xmm = 0x90;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+
+namespace System
+{
+    [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
+    public sealed class CLSCompliantAttribute : Attribute
+    {
+        private bool _compliant;
+
+        public CLSCompliantAttribute(bool isCompliant)
+        {
+            _compliant = isCompliant;
+        }
+        public bool IsCompliant
+        {
+            get
+            {
+                return _compliant;
+            }
+        }
+    }
 }

@@ -277,7 +277,9 @@ namespace System.Threading
                     throw new ArgumentException();
 
                 case Interop.Errors.ERROR_ACCESS_DENIED:
-                    throw new UnauthorizedAccessException();
+                    // throw new UnauthorizedAccessException();
+                    Debug.WriteLine("UnauthorizedAccessException");
+                    return;
 
                 case Interop.Errors.ERROR_NOT_ENOUGH_MEMORY:
                     throw new OutOfMemoryException();

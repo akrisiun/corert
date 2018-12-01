@@ -15,47 +15,23 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public class TypeHack
+    public class TypeHack // : Type
     {
         private readonly RuntimeTypeHandle _typeHandle;
 
-        /* public TypeHack(object typeHandle)
+        private TypeHack(RuntimeTypeHandle typeHandle)
         {
-            _typeHandle = typeHandle as RuntimeTypeHandle;
-        } 
-        */
-
-        public TypeHack(object type)
-        {
-            type = typeof(TypeHack);
-            var asm = typeof(TypeHack).Assembly;
-            _typeHandle = (type as Type ?? type.GetType()).TypeHandle;
+            _typeHandle = typeHandle;
         }
 
-        public static object CurrentDomain => AppDomain.CurrentDomain;
+        public RuntimeTypeHandle TypeHandle2 => _typeHandle;
 
-        public IntPtr TypeHandle => _typeHandle.Value; // _value;
-        // public RuntimeTypeHandle TypeHandle2 => _typeHandle;
-
-        public static TypeHack GetTypeFromHandle2(object rh) // RuntimeTypeHandle rh)
+        public static TypeHack GetTypeFromHandle2(RuntimeTypeHandle rh)
         {
             return new TypeHack(rh);
         }
     }
 
-    public static class TypeExtensions
-    {
-        public static string GetAssemblyLoadPath(this System.Type type)
-        {
-            return ""; // ServiceLocator.AssemblyLoader.GetAssemblyLoadPath (type.GetTypeInfo ().Assembly);
-        }
-
-        public static string GetSystemAssemblyPathByName(string assemblyName)
-        {
-            var root = System.IO.Path.GetDirectoryName (typeof (object).GetAssemblyLoadPath ());
-            return System.IO.Path.Combine (root, assemblyName);
-        }
-    }
     internal sealed class IntrinsicAttribute : Attribute
     {
     }
@@ -312,7 +288,7 @@ namespace System
             // Debug.Assert(!pObjType->IsCloned, "cloned array types are disallowed");
 
             // compare the array types structurally
-/*
+
             if (pObjType->ParameterizedTypeShape != pTargetType->ParameterizedTypeShape)
             {
                 // If the shapes are different, there's one more case to check for: Casting SzArray to MdArray rank 1.
@@ -322,12 +298,11 @@ namespace System
                 }
             }
 
-            
             if (CastCache.AreTypesAssignableInternal(pObjType->RelatedParameterType, pTargetType->RelatedParameterType,
                 AssignmentVariation.AllowSizeEquivalence, null))
             {
                 return obj;
-            } */
+            }
 
             return null;
         }

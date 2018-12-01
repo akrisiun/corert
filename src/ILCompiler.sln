@@ -39,6 +39,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILCompiler.WebAssembly", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSource", "EventSource\EventSource\EventSource.csproj", "{0B4E4F5E-867D-497A-AEA6-CF942D064289}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "project", "..\samples\tool-runtime\project.csproj", "{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F6D527F6-5E92-4FCF-945A-ED1B838E8DBD}"
+	ProjectSection(SolutionItems) = preProject
+		dir.props = dir.props
+		dir.targets = dir.targets
+		..\samples\dir.targets = ..\samples\dir.targets
+		dirs.proj = dirs.proj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		System.Private.CoreLib\shared\System.Private.CoreLib.Shared.projitems*{be95c560-b508-4588-8907-f9fc5bc1a0cf}*SharedItemsImports = 4
@@ -525,6 +535,34 @@ Global
 		{0B4E4F5E-867D-497A-AEA6-CF942D064289}.Release|x64.Build.0 = Debug|Any CPU
 		{0B4E4F5E-867D-497A-AEA6-CF942D064289}.Release|x86.ActiveCfg = Debug|Any CPU
 		{0B4E4F5E-867D-497A-AEA6-CF942D064289}.Release|x86.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|arm.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|arm.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|arm64.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|armel.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|armel.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|wasm.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|wasm.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|x64.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Debug|x86.Build.0 = Debug|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|arm.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|arm.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|arm64.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|arm64.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|armel.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|armel.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|wasm.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|wasm.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x64.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x64.Build.0 = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x86.ActiveCfg = Release|Any CPU
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -533,6 +571,7 @@ Global
 		{4B8DCBB3-B3F2-4463-BFC1-76611B26FFC6} = {3FD58022-3458-4BED-9CE7-908139F377FB}
 		{F1D6BEE1-942C-4EE4-87D5-DA4961A206A9} = {3FD58022-3458-4BED-9CE7-908139F377FB}
 		{0B4E4F5E-867D-497A-AEA6-CF942D064289} = {3FD58022-3458-4BED-9CE7-908139F377FB}
+		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC} = {3FD58022-3458-4BED-9CE7-908139F377FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {101A4ED9-09FD-4026-98CD-68632932B606}

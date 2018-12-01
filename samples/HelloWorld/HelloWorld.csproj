@@ -1,29 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<!--<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
+  -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <!--
+    <OutputType>Library</OutputType>
+    -->
+    
     <!--<OutputType>Library</OutputType>-->
     <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
     <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
-    <!--<TargetFrameworkIdentifier>_</TargetFrameworkIdentifier>-->
+    <!--<TargetFrameworkIdentifier>_</TargetFrameworkIdentifier>
+    -->
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
     <RidSpecificAssets>true</RidSpecificAssets>
-    
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+<!--
     <_UnsupportedTargetFrameworkError>false</_UnsupportedTargetFrameworkError>
-    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
     <RidSpecificAssets>true</RidSpecificAssets>
 
     <IsDotNetFrameworkProductAssembly>true</IsDotNetFrameworkProductAssembly>
     <IsCoreAssembly>true</IsCoreAssembly>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+-->
     <IsProjectNLibrary>false</IsProjectNLibrary>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
 
-    <NoWarn>;NU1701;49;3;17;34;IDE1006;1006;CS0436;CA1016;</NoWarn>
+    <NoWarn>NU1701;NU1201;49;3;17;34;IDE1006;1006;CS0436;CA1016;CS0433;</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x64</PlatformTarget>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
     
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Open.snk</AssemblyOriginatorKeyFile>
@@ -42,6 +52,24 @@
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
+    <RdXmlFile Include="rd.xml" />
+    <ProjectReference Include="..\..\src\ILCompiler.Compiler\src\ILCompiler.Compiler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+     <!-- 
+    <Compile Include="..\..\src\Common\src\Internal\NativeFormat\NativeFormatReader.Primitives.cs" Link="Hacks\NativeFormatReader.Primitives.cs" />
+    <Compile Include="..\..\src\Common\src\Internal\Runtime\EEType.Constants.cs" Link="Hacks\EEType.Constants.cs" />
+    <Compile Include="..\..\src\Runtime.Base\src\System\Delegate.cs" Link="Hacks\Delegate.cs" />
+    <Compile Include="..\..\src\Runtime.Base\src\System\Runtime\EETypePtr.cs" Link="Hacks\EETypePtr.cs" />
+    <Compile Include="..\..\src\Runtime.Base\src\System\Runtime\InteropServices\CallingConvention.cs" Link="Hacks\CallingConvention.cs" />
+    <Compile Include="..\..\src\Runtime.Base\src\System\String.cs" Link="Hacks\String.cs" />
+    <Compile Include="Hacks\Object.cs" />
+    <Compile Include="Hacks\Type.cs" />
+    -->
+    <Compile Remove="Hacks\Object.cs" />
+    <Compile Remove="Hacks\Type.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,26 +81,16 @@
     </Content>
   </ItemGroup>
   
-  <ItemGroup Condition="'$(IsProjectNLibrary)' != 'true'">
-    <!--
-    <ProjectReference Include="..\..\AotPackageReference\AotPackageReference.depproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
-    </ProjectReference>
-    -->
-    <ProjectReference Include="..\..\System.Private.CoreLib\src\System.Private.CoreLib.csproj" />
-    <ProjectReference Include="..\..\System.Private.StackTraceGenerator\src\System.Private.StackTraceGenerator.csproj" />
-  </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\System.Private.DeveloperExperience.Console\src\System.Private.DeveloperExperience.Console.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.DotNetHostPolicy" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NETCore.Runtime.CoreCLR" Version="2.0.8" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+
     <Reference Include="System.Collections">
       <Private>true</Private>
       <HintPath>..\..\bin\System.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="System.Console">
+    <Reference Include="System.Console, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>true</Private>
       <HintPath>..\..\bin\System.Console.dll</HintPath>
     </Reference>
@@ -80,13 +98,38 @@
       <Private>true</Private>
       <HintPath>..\..\bin\System.IO.dll</HintPath>
     </Reference>
-    <!--<Reference Include="System.Private.CoreLib">
+    
+    <Reference Include="System.Private.Interop">
+      <HintPath>..\..\bin\System.Private.Interop.dll</HintPath>
       <Private>true</Private>
+    </Reference>
+    <Reference Include="System.Private.Reflection.Metadata">
+      <HintPath>..\..\bin\System.Private.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <!--
+    
+    <Reference Include="System.Private.CoreLib">
       <HintPath>..\..\bin\System.Private.CoreLib.dll</HintPath>
-    </Reference>-->
-    <!--<Reference Include="System.Private.DeveloperExperience.Console">
+      <Private>true</Private>
+      <Aliases>Private</Aliases>
+    </Reference>
+    
+    <Reference Include="System.Console">
+    , Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+
+    -->
+    <Reference Include="System.Private.CoreLib">
+      <Private>true</Private>
+      <Aliases>System_Private_CoreLib</Aliases>
+      <HintPath>..\..\bin\System.Private.CoreLib.dll</HintPath>
+    </Reference>
+    <!--
+    <Reference Include="System.Private.DeveloperExperience.Console, Version=0.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+    -->
+    <Reference Include="System.Private.DeveloperExperience.Console">
+      <Private>true</Private>
       <HintPath>..\..\bin\System.Private.DeveloperExperience.Console.dll</HintPath>
-    </Reference>-->
+    </Reference>
     <Reference Include="System.Private.Reflection.Metadata.Ecma335">
       <Private>true</Private>
       <HintPath>..\..\bin\System.Private.Reflection.Metadata.Ecma335.dll</HintPath>
@@ -95,14 +138,23 @@
       <Private>true</Private>
       <HintPath>..\..\bin\System.Private.Threading.dll</HintPath>
     </Reference>
-    <!--<Reference Include="System.Runtime.Extensions">
+    <!--
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\bin\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>..\..\bin\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    -->
+    <Reference Include="System.Runtime.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>true</Private>
       <HintPath>..\..\bin\System.Runtime.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime">
+    <Reference Include="System.Runtime, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>true</Private>
       <HintPath>..\..\bin\System.Runtime.dll</HintPath>
-    </Reference>-->
+    </Reference>
+    
   </ItemGroup>
 
   <ItemGroup>
@@ -113,4 +165,8 @@
     <ReferencePath Include="$(AotPackageReferencePath)\System.IO.dll" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hacks\" />
+  </ItemGroup>
+  <!-- <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />-->
 </Project>

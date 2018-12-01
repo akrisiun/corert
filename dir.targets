@@ -1,7 +1,8 @@
 <Project InitialTargets="CheckForBuildTools" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Target Name="CheckForBuildTools">
-    <Error Condition="!Exists('$(ToolsDir)') and '$(OverrideToolsDir)'=='true'"
+    <Error Condition="!Exists('$(ToolsDir)') and '$(OverrideToolsD
+    ir)'=='true'"
            Text="The tools directory [$(ToolsDir)] does not exist. Please run sync in your enlistment to ensure the tools are installed before attempting to build an individual project." />
     <Error Condition="!Exists('$(ToolsDir)') and '$(OverrideToolsDir)'!='true'"
            Text="The tools directory [$(ToolsDir)] does not exist. Please run init-tools.cmd in your enlistment to ensure the tools are installed before attempting to build an individual project." />

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
+using System.Diagnostics;
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -82,7 +82,13 @@ namespace Internal.Runtime.CompilerHelpers
 
         public static void ThrowFileNotFoundException(ExceptionStringID id, string fileName)
         {
-            throw TypeLoaderExceptionHelper.CreateFileNotFoundException(id, fileName);
+            if (Debugger.IsAttached)
+                Debugger.Break();
+            else
+                Debugger.Launch();
+
+            Debug.WriteLine("Not found" + fileName);
+            // throw TypeLoaderExceptionHelper.CreateFileNotFoundException(id, fileName);
         }
 
         public static void ThrowInvalidProgramException(ExceptionStringID id)

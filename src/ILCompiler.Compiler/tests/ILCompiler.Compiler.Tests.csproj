@@ -5,19 +5,38 @@
     <AssemblyName>ILCompiler.Compiler.Tests</AssemblyName>
     <RootNamespace>ILCompiler.Compiler.Tests</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
+
+    <DefineConstants>TRACE;DEBUG;AMD64;BIT64;PLATFORM_WINDOWS;CORERT;</DefineConstants>
+    <!-- ;INPLACE_RUNTIME -->
+    <OutputPath>E:\Beta\dot64\corert\bin</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
     <NoWarn>8,17</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit">
-      <Version>$(XUnitPackageVersion)</Version>
+      <!-- <Version>$(XUnitPackageVersion)</Version>-->
+      <Version>2.4.1-pre.build.4059</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.DotNet.XUnitExtensions">
       <Version>$(MicrosoftDotNetXUnitExtensionsVersion)</Version>
     </PackageReference>
+    <PackageReference Include="xunit.extensibility.execution">
+      <Version>2.4.1-pre.build.4059</Version>
+      <!-- xunit.extensibility.execution.2.4.1-pre.build.4059.nupkg -->
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <Version>$(XUnitPackageVersion)</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+
     <ProjectReference Include="..\src\ILCompiler.Compiler.csproj" />
     <ProjectReference Include="..\..\ILCompiler.DependencyAnalysisFramework\src\ILCompiler.DependencyAnalysisFramework.csproj" />
     <ProjectReference Include="..\..\ILCompiler.MetadataTransform\src\ILCompiler.MetadataTransform.csproj" />

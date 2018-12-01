@@ -20,6 +20,11 @@ namespace System
     {
         private void Init()
         {
+             if (Debugger.IsAttached)
+                Debugger.Break();
+            else
+                Debugger.Launch();
+
             _message = null;
             HResult = HResults.COR_E_EXCEPTION;
         }

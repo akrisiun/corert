@@ -1,0 +1,7 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+     <ToolsDir>e:\Beta\dot64\corert\Tools</ToolsDir>
+  </PropertyGroup>
+  <Import Project="..\dir.targets" />
+
+</Project>

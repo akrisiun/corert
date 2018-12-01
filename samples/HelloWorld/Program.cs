@@ -1,7 +1,9 @@
 ﻿using System;
-#if SUPPORT_JIT
-extern alias System_Private_CoreLib;
-using TextWriter = System_Private_CoreLib::System.IO.TextWriter;
+using System.Diagnostics;
+
+#if !SUPPORT_JIT
+// extern alias System_Private_CoreLib;
+// using TextWriter = System_Private_CoreLib::System.IO.TextWriter;
 #endif
 
 namespace HelloWorld
@@ -10,12 +12,38 @@ namespace HelloWorld
     {
         static int Main() // string[] args
         {
-            //  String str = "Hello World!";
-            // Object obj = str;
-            // Console.WriteLine(str);
+            string str = "Hello World! #3";
+            Console.WriteLine(str);
+            object obj = str;
+
+            Debugger.Break();
+            
+            // Microsoft.NETCore.App\2.1.6
+            Console.WriteLine("BaseDirectory");
+            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine("CurrentDirectory");
+            // Console.WriteLine(System.Environment.CurrentDirectory);
+
+            Console.WriteLine("Hack:");
+            var h = Hacks.Type(str);
+            var str2 = h.ToString();
+            Console.WriteLine("str2:");
+            Console.WriteLine(str2);
+            // error CS0012: The type 'Object' is defined in an assembly that is not referenced. 
+            // You must add a reference to assembly 'System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
             return 0;
         }
     }
+
+    public class Hacks {
+
+        public static object Type(string str)
+        {
+            var hack = new System.TypeHack(null); // str.GetType());
+            return hack;
+        }
+   }
+
 }
 
 /*

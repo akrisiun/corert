@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "src\\ILCompiler.Compiler"
+		},
+		{
+			"path": "src\\System.Private.CoreLib"
+		},
+		{
+			"path": "src\\Test.CoreLib"
+		},
+		{
+			"path": "src\\Common"
+		},
+		{
+			"path": "src\\System.Private.DeveloperExperience.Console"
+		},
+		{
+			"path": "Documentation"
+		},
+		{
+			"path": "samples"
+		}
+	],
+	"settings": {}
+}

@@ -118,8 +118,8 @@ namespace Internal.Runtime
 
     [StructLayout(LayoutKind.Sequential)]
     // internal 
-#if INPLACE_RUNTIME
-    [CLSCompliant(false)]
+#if !INPLACE_RUNTIME
+            // [CLSCompliant(false)]
 #endif            
 
     public unsafe partial struct EEType
@@ -265,11 +265,11 @@ namespace Internal.Runtime
         }
 
 
-#if INPLACE_RUNTIME
-        [CLSCompliant(false)]
+#if !INPLACE_RUNTIME
+         //   [CLSCompliant(true)]
 #endif            
-        // internal 
-        public 
+        internal 
+        // public 
             uint BaseSize
         {
             get
@@ -616,11 +616,11 @@ namespace Internal.Runtime
         // shape of 1 indicates a ByRef, and >=SZARRAY_BASE_SIZE indicates that this is an array.
         // Two types are not equivalent if their shapes do not exactly match.
 
-#if INPLACE_RUNTIME
-        [CLSCompliant(false)]
-#endif            
-        // internal 
-        public
+#if !INPLACE_RUNTIME
+            // [CLSCompliant(false)]
+#endif
+        internal
+        // public 
             uint ParameterizedTypeShape
         {
             get
@@ -1300,10 +1300,7 @@ namespace Internal.Runtime
             }
         }
 
-#if INPLACE_RUNTIME        
-        // ankr
         [CLSCompliant(false)]
-#endif        
         public uint GetFieldOffset(EETypeField eField)
         {
             // First part of EEType consists of the fixed portion followed by the vtable.

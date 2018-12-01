@@ -102,7 +102,7 @@ namespace System
         /// </summary>
         internal unsafe uint GetRawDataSize()
         {
-            return 8; // EEType->BaseSize - (uint)sizeof(ObjHeader) - (uint)sizeof(EEType*);
+            return EEType->BaseSize - (uint)sizeof(ObjHeader) - (uint)sizeof(EEType*);
         }
     }
 }

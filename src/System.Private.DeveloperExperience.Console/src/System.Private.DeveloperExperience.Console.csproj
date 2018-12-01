@@ -2,9 +2,6 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <!-- <OutputType>Library</OutputType>
-    -->
-
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
     <RidSpecificAssets>true</RidSpecificAssets>
@@ -68,6 +65,7 @@
     <Compile Include="..\..\Runtime.Base\src\System\String.cs" Link="Hacks\String.cs" />
     <Compile Include="Hacks\ClassConstructorRunner.cs" />
     <Compile Include="Hacks\InternalCalls2.cs" />
+    <Compile Include="Hacks\String2.cs" />
     <Compile Include="Internal\DeveloperExperience\DeveloperExperienceConnector.cs" />
     <Compile Include="Internal\DeveloperExperience\DeveloperExperienceConsole.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\LibraryInitializer.cs" />

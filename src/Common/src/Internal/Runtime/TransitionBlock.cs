@@ -29,20 +29,29 @@
 #define ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE
 #define CALLDESCR_ARGREGS                          // CallDescrWorker has ArgumentRegister parameter
 #elif AMD64
+
 #if PLATFORM_UNIX
 #define UNIX_AMD64_ABI
 #define CALLDESCR_ARGREGS                          // CallDescrWorker has ArgumentRegister parameter
 #else
 #endif
+
 #define CALLDESCR_FPARGREGS                        // CallDescrWorker has FloatArgumentRegisters parameter
 #define _TARGET_AMD64_
 #define ENREGISTERED_RETURNTYPE_MAXSIZE
 #define ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE
 #define ENREGISTERED_PARAMTYPE_MAXSIZE
+
 #elif WASM
 #define _TARGET_WASM_
 #else
-#error Unknown architecture!
+// #error Unknown architecture!
+#define CALLDESCR_FPARGREGS                        // CallDescrWorker has FloatArgumentRegisters parameter
+#define _TARGET_AMD64_
+#define ENREGISTERED_RETURNTYPE_MAXSIZE
+#define ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE
+#define ENREGISTERED_PARAMTYPE_MAXSIZE
+
 #endif
 
 // Provides an abstraction over platform specific calling conventions (specifically, the calling convention
