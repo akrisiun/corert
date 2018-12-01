@@ -6,6 +6,9 @@
     <RootNamespace>ILCompiler.Compiler.Tests</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NoWarn>8,17</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit">
       <Version>$(XUnitPackageVersion)</Version>
