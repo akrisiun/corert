@@ -65,7 +65,9 @@ namespace System
         }
 
 #if INPLACE_RUNTIME
-        internal unsafe EEType* EEType
+        // internal 
+        [CLSCompliant(false)]
+        public unsafe EEType* EEType
         {
             get
             {

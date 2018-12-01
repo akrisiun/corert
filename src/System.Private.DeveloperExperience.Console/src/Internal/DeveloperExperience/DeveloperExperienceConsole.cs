@@ -12,14 +12,14 @@ namespace Internal.DeveloperExperience
 {
     internal sealed class DeveloperExperienceConsole : DeveloperExperience
     {
-        public sealed override void WriteLine(String s)
+        public sealed override void WriteLine(string s)
         {
             Console.Error.WriteLine(s);
         }
 
-        public sealed override String CreateStackTraceString(IntPtr ip, bool includeFileInfo)
+        public sealed override string CreateStackTraceString(IntPtr ip, bool includeFileInfo)
         {
-            String s = Internal.StackTraceGenerator.StackTraceGenerator.CreateStackTraceString(ip, includeFileInfo);
+            string s = Internal.StackTraceGenerator.StackTraceGenerator.CreateStackTraceString(ip, includeFileInfo);
             if (s != null)
                 return s;
             return base.CreateStackTraceString(ip, includeFileInfo);

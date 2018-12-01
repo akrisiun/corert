@@ -20,6 +20,9 @@ namespace EventSourceSamples
     [EventSource(Name = "Samples-EventSourceDemos-Minimal")]
     public sealed class MinimalEventSource : EventSource
     {
+        // E:\Beta\dot64\corert\src\EventSource\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.0.26\
+        // lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll
+
         #region Singleton instance
 
         // define the singleton instance of the event source

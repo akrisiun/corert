@@ -10,7 +10,8 @@ using System.Runtime.InteropServices;
 namespace Internal.Runtime
 {
     // Extensions to EEType that are specific to the use in Runtime.Base.
-    internal unsafe partial struct EEType
+    // internal 
+    public unsafe partial struct EEType
     {
         internal DispatchResolve.DispatchMap* DispatchMap
         {
@@ -38,7 +39,8 @@ namespace Internal.Runtime
 #endif
         }
 
-        internal Exception GetClasslibException(ExceptionIDs id)
+        //  internal 
+            public Exception GetClasslibException(ExceptionIDs id)
         {
 #if INPLACE_RUNTIME
             return RuntimeExceptionHelpers.GetRuntimeException(id);

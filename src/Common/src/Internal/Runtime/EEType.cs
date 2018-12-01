@@ -13,6 +13,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime
 {
+    //public class CLSCompliant : Attribute
+    //{ }
+
     [StructLayout(LayoutKind.Sequential)]
     internal struct ObjHeader
     {
@@ -114,7 +117,9 @@ namespace Internal.Runtime
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct EEType
+    // internal 
+    [CLSCompliant(false)]
+    public unsafe partial struct EEType
     {
 #if BIT64
         private const int POINTER_SIZE = 8;
@@ -256,7 +261,9 @@ namespace Internal.Runtime
 #endif
         }
 
-        internal uint BaseSize
+        // internal 
+        [CLSCompliant(false)]
+        public uint BaseSize
         {
             get
             {
@@ -362,7 +369,8 @@ namespace Internal.Runtime
             }
         }
 
-        internal bool IsCanonical
+        //  internal 
+            public bool IsCanonical
         {
             get
             {
@@ -370,7 +378,8 @@ namespace Internal.Runtime
             }
         }
 
-        internal bool IsString
+        //  internal 
+            public bool IsString
         {
             get
             {
@@ -379,7 +388,8 @@ namespace Internal.Runtime
             }
         }
 
-        internal bool IsArray
+        //  internal 
+            public bool IsArray
         {
             get
             {
@@ -388,7 +398,8 @@ namespace Internal.Runtime
         }
 
 
-        internal int ArrayRank
+        //  internal 
+            public int ArrayRank
         {
             get
             {
@@ -405,7 +416,8 @@ namespace Internal.Runtime
             }
         }
 
-        internal bool IsSzArray
+        //  internal 
+            public  bool IsSzArray
         {
             get
             {
@@ -413,7 +425,8 @@ namespace Internal.Runtime
             }
         }
 
-        internal bool IsGeneric
+        //  internal 
+            public  bool IsGeneric
         {
             get
             {
@@ -595,7 +608,10 @@ namespace Internal.Runtime
         // Currently, the meaning is a shape of 0 indicates that this is a Pointer,
         // shape of 1 indicates a ByRef, and >=SZARRAY_BASE_SIZE indicates that this is an array.
         // Two types are not equivalent if their shapes do not exactly match.
-        internal uint ParameterizedTypeShape
+        
+            //  internal
+            [CLSCompliant(false)]
+            public uint ParameterizedTypeShape
         {
             get
             {
@@ -988,7 +1004,9 @@ namespace Internal.Runtime
             }
         }
 
-        internal EEType* RelatedParameterType
+        //  internal 
+        [CLSCompliant(false)]
+            public EEType* RelatedParameterType
         {
             get
             {
@@ -1269,6 +1287,7 @@ namespace Internal.Runtime
             }
         }
 
+        // [CLSCompliant(false)]
         public uint GetFieldOffset(EETypeField eField)
         {
             // First part of EEType consists of the fixed portion followed by the vtable.

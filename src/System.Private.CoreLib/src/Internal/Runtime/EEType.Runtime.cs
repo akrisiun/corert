@@ -10,7 +10,8 @@ using System.Runtime.InteropServices;
 namespace Internal.Runtime
 {
     // Extensions to EEType that are specific to the use in the CoreLib.
-    internal unsafe partial struct EEType
+    // internal 
+    public unsafe partial struct EEType
     {
 #if !INPLACE_RUNTIME
         internal EEType* GetArrayEEType()

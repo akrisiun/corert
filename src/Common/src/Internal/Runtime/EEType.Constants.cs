@@ -192,7 +192,8 @@ namespace Internal.Runtime
         IsByRefLikeFlag = 0x00008000,
     }
 
-    internal enum EETypeField
+    // internal 
+    public enum EETypeField
     {
         ETF_InterfaceMap,
         ETF_Finalizer,
