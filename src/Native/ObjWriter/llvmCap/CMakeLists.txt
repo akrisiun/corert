@@ -22,7 +22,9 @@ if(NOT OBJWRITER_TARGET_ARCH)
   elseif(CLR_CMAKE_TARGET_ARCH STREQUAL "arm64")
     set(OBJWRITER_TARGET_ARCH "AArch64")
   else()
-    clr_unknown_arch()
+    # clr_unknown_arch()
+    # $$$$$$$$$$$$$$$$$$
+    set(OBJWRITER_TARGET_ARCH "X86")
   endif()
 endif()
 

@@ -103,7 +103,7 @@ typedef UIntTarget TgtPTR_StaticGcDesc;
 typedef DPTR(class EEType) PTR_EEType;
 typedef SPTR(struct StaticGcDesc) PTR_StaticGcDesc;
 
-#ifdef _TARGET_AMD64_
+#ifdef _TARGET_AMD64_ // || WIN64
 typedef UInt64 UIntTarget;
 #elif defined(_TARGET_X86_)
 typedef UInt32 UIntTarget;
@@ -115,6 +115,10 @@ typedef UInt64 UIntTarget;
 typedef UInt32 UIntTarget;
 #else
 #error unexpected target architecture
+// #undefine _TARGET_X86_
+// #define _AMD64_
+// #define _TARGET_AMD64_
+typedef UInt64 UIntTarget;
 #endif
 
 typedef PTR_UInt8                       TgtPTR_UInt8;

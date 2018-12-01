@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5CA224C1-E140-3C9A-B8D3-42511352CCDC}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\corert\src\Native;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\corert\src\Native;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\corert\src\Native;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\corert\src\Native;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Beta\dot64\corert\src\Native\CMakeFiles\07cb10dcf4e1ad5fd945af71faedbd77\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/corert/src/Native -BE:/Beta/dot64/corert/src/Native --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Beta/dot64/corert/src/Native/CoreRT.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/Beta/dot64/corert/src/Native/CMakeFiles/07cb10dcf4e1ad5fd945af71faedbd77/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASM_MASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceRuns.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeASM_MASMCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCXXCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeRCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeSystem.cmake;E:\Beta\dot64\corert\src\Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\configure.cmake;E:\Beta\dot64\corert\src\Native\functions.cmake;E:\Beta\dot64\corert\src\Native\gc\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Beta\dot64\corert\src\Native\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/corert/src/Native -BE:/Beta/dot64/corert/src/Native --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Beta/dot64/corert/src/Native/CoreRT.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/Beta/dot64/corert/src/Native/CMakeFiles/07cb10dcf4e1ad5fd945af71faedbd77/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASM_MASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceRuns.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeASM_MASMCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCXXCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeRCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeSystem.cmake;E:\Beta\dot64\corert\src\Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\configure.cmake;E:\Beta\dot64\corert\src\Native\functions.cmake;E:\Beta\dot64\corert\src\Native\gc\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Beta\dot64\corert\src\Native\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/corert/src/Native -BE:/Beta/dot64/corert/src/Native --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Beta/dot64/corert/src/Native/CoreRT.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/Beta/dot64/corert/src/Native/CMakeFiles/07cb10dcf4e1ad5fd945af71faedbd77/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASM_MASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceRuns.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeASM_MASMCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCXXCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeRCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeSystem.cmake;E:\Beta\dot64\corert\src\Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\configure.cmake;E:\Beta\dot64\corert\src\Native\functions.cmake;E:\Beta\dot64\corert\src\Native\gc\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Beta\dot64\corert\src\Native\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/corert/src/Native -BE:/Beta/dot64/corert/src/Native --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Beta/dot64/corert/src/Native/CoreRT.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/Beta/dot64/corert/src/Native/CMakeFiles/07cb10dcf4e1ad5fd945af71faedbd77/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeASM_MASMInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckCXXSourceRuns.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeASM_MASMCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeCXXCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeRCCompiler.cmake;E:\Beta\dot64\corert\src\Native\CMakeFiles\3.13.1\CMakeSystem.cmake;E:\Beta\dot64\corert\src\Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\configure.cmake;E:\Beta\dot64\corert\src\Native\functions.cmake;E:\Beta\dot64\corert\src\Native\gc\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeLists.txt;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Beta\dot64\corert\src\Native\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\gc\sample\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\base\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\cpp\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\Bootstrap\dll\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\jitinterface\CMakeFiles\generate.stamp;E:\Beta\dot64\corert\src\Native\System.Private.TypeLoader.Native\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

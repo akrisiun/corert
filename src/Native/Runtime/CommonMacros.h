@@ -98,8 +98,9 @@ EXTERN_C int __cdecl memcmp(const void *,const void *,size_t);
 //-------------------------------------------------------------------------------------------------
 // Platform-specific defines
 
-#if defined(_AMD64_)
+#if defined(_AMD64_) || defined(_X64_)  || defined(__x86_64__)  || defined(WIN64)
 
+// #define _AMD64_
 #define LOG2_PTRSIZE 3
 #define POINTER_SIZE 8
 

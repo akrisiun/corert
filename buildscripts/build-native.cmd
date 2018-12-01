@@ -33,8 +33,9 @@ echo.
 :PrepareVs
 :: Set the environment for the native build
 set __VCBuildArch=x86_amd64
-if /i "%__BuildArch%" == "x86" (set __VCBuildArch=x86)
+@REM # if /i "%__BuildArch%" == "x86" (set __VCBuildArch=x86)
 
+echo "!VS%__VSProductVersion%COMNTOOLS!\..\..\VC\Auxiliary\Build\vcvarsall.bat" %__VCBuildArch%
 call "!VS%__VSProductVersion%COMNTOOLS!\..\..\VC\Auxiliary\Build\vcvarsall.bat" %__VCBuildArch%
 
 :: Regenerate the build files
@@ -45,8 +46,10 @@ popd
 
 if exist "%__IntermediatesDir%\install.vcxproj" goto BuildNativeVs
 if exist "%__IntermediatesDir%\Makefile" goto BuildNativeEmscripten
-echo Failed to generate native component build project!
-exit /b 1
+
+@REM #echo Failed to generate native component build project!
+goto BuildNativeVs
+@REM exit /b 1
 
 :BuildNativeVs
 %_msbuildexe% /ConsoleLoggerParameters:ForceNoAlign "%__IntermediatesDir%\install.vcxproj" %__ExtraMsBuildParams% /nologo /maxcpucount /nodeReuse:false /p:Configuration=%__BuildType% /p:Platform=%__BuildArch% /fileloggerparameters:Verbosity=normal;LogFile="%__NativeBuildLog%"

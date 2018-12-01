@@ -11,17 +11,18 @@
              Projects="@(Project)"
              Condition="'$(SerializeProjects)'=='true' AND '%(Identity)' != ''"
              Properties="DefaultBuildAllTarget=$(DefaultBuildAllTarget);BuildAllProjects=true"
-             ContinueOnError="ErrorAndContinue" />
+             ContinueOnError="true" />
 
     <MSBuild Targets="$(DefaultBuildAllTarget)"
              Projects="@(Project)"
              Condition="'$(SerializeProjects)'!='true'"
              Properties="DefaultBuildAllTarget=$(DefaultBuildAllTarget);BuildAllProjects=true"
              BuildInParallel="true"
-             ContinueOnError="ErrorAndContinue" />
+             ContinueOnError="true" />
 
-    <!-- Given we ErrorAndContinue we need to propagate the error if the overall task failed -->
+    <!-- Given we ErrorAndContinue we need to propagate the error if the overall task failed
     <Error Condition="'$(MSBuildLastTaskResult)'=='false'" />
+     -->
   </Target>
 
   <Target Name="RestoreAllProjects">

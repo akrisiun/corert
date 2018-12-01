@@ -725,9 +725,10 @@ REDHAWK_PALIMPORT Int32 PalGetModuleFileName(_Out_ const TCHAR** pModuleNameOut,
 #if defined(_X86_)
 EXTERN_C unsigned long __readfsdword(unsigned long Offset);
 #pragma intrinsic(__readfsdword)
-#elif defined(_AMD64_)
+#elif defined(_AMD64_) || WIN64
 EXTERN_C unsigned __int64  __readgsqword(unsigned long Offset);
 #pragma intrinsic(__readgsqword)
+
 #elif defined(_ARM_)
 EXTERN_C unsigned int _MoveFromCoprocessor(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 #pragma intrinsic(_MoveFromCoprocessor)

@@ -1,6 +1,8 @@
 @if not defined _echo @echo off
 setlocal EnableDelayedExpansion
 
+@REM # & "c:\Program Files\CMake\bin\cmake.exe" . -G "Visual Studio 15 2017 Win64"
+
 set __ThisScriptShort=%0
 
 if /i "%1" == "/?"    goto HelpVarCall
@@ -28,6 +30,7 @@ exit /b %ERRORLEVEL%
 echo Commencing CoreRT Repo build
 echo.
 
+echo & ./buildscripts/build-native.cmd X64
 call %~dp0buildscripts\build-native.cmd %*
 
 IF NOT ERRORLEVEL 1 goto AfterNativeBuild
@@ -36,6 +39,7 @@ exit /b %ERRORLEVEL%
 
 :AfterNativeBuild
 
+echo & ./buildscripts/build-managed.cmd X64
 call %~dp0buildscripts\build-managed.cmd %*
 
 IF NOT ERRORLEVEL 1 goto AfterManagedBuild

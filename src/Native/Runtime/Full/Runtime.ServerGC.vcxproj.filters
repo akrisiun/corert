@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\allocheap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\rhassert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\CachedInterfaceDispatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\Crst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\DebugEventSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\DebugFuncEval.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\DebuggerHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\eetype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\EHHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\FinalizerHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\GCHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\gcheaputilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\GCMemoryHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\gcrhenv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\gcrhscan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\GcStressControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\GenericUnification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\HandleTableHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\MathHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\MiscHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\TypeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\ObjectLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\OptionalFieldsRuntime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\portable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\profheapwalkhelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\RestrictedCallouts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\RhConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\RuntimeInstance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\RWLock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\SectionMethodList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\sha1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\StackFrameIterator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\startup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\stressLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\strongname.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\SyncClean.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\threadstore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\UniversalTransitionHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gccommon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gceewks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gcwks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gcscan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\handletable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\handletablecache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\handletablecore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\handletablescan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\objecthandle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\windows\PalRedhawkCommon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\windows\PalRedhawkMinWin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\AsmOffsetsVerify.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\ThunksMapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\Runtime\windows\CoffNativeCodeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gceesvr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Beta\dot64\corert\src\Native\gc\gcsvr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Beta\dot64\corert\src\Native\Runtime\Full\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\GC.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\GcProbe.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\AllocFast.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\CallDescrWorker.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\CallingConventionConverterHelpers.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\ExceptionHandling.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\Interlocked.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\PInvoke.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\InteropThunksHelpers.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\StubDispatch.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\UniversalTransition.asm" />
+    <MASM Include="E:\Beta\dot64\corert\src\Native\Runtime\amd64\WriteBarriers.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AB5636D7-4ABA-398E-AE7D-EB16F7DD8D6A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
