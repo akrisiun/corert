@@ -33,22 +33,6 @@ namespace ILCompiler.DependencyAnalysis
         }
     }
 
-    public struct DebugEHClauseInfo
-    {
-        public uint TryOffset;
-        public uint TryLength;
-        public uint HandlerOffset;
-        public uint HandlerLength;
-
-        public DebugEHClauseInfo(uint tryOffset, uint tryLength, uint handlerOffset, uint handlerLength)
-        {
-            TryOffset = tryOffset;
-            TryLength = tryLength;
-            HandlerOffset = handlerOffset;
-            HandlerLength = handlerLength;
-        }
-    }
-
     public interface INodeWithCodeInfo
     {
         FrameInfo[] FrameInfos
@@ -57,11 +41,6 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         byte[] GCInfo
-        {
-            get;
-        }
-
-        DebugEHClauseInfo[] DebugEHClauseInfos
         {
             get;
         }

@@ -63,8 +63,6 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override bool IsVisibleFromManagedCode => false;
-
         protected sealed override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
         public override bool IsShareable => true;
 
@@ -208,7 +206,7 @@ namespace ILCompiler.DependencyAnalysis
             return conditionalDependencies;
         }
         
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             var compare = _id.CompareTo(((ReadyToRunGenericHelperNode)other)._id);
             if (compare != 0)
@@ -274,7 +272,7 @@ namespace ILCompiler.DependencyAnalysis
             AppendLookupSignatureMangledName(nameMangler, sb);
         }
 
-        public override int ClassCode => 1055354299;
+        protected internal override int ClassCode => 1055354299;
     }
 
     public partial class ReadyToRunGenericLookupFromTypeNode : ReadyToRunGenericHelperNode
@@ -296,6 +294,6 @@ namespace ILCompiler.DependencyAnalysis
             AppendLookupSignatureMangledName(nameMangler, sb);
         }
 
-        public override int ClassCode => 913214059;
+        protected internal override int ClassCode => 913214059;
     }
 }

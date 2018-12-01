@@ -37,6 +37,9 @@ namespace Internal.TypeSystem
             {
                 MethodDesc getFieldHelperMethod = _valueTypeMethodHashtable.GetOrCreateValue((DefType)valueTypeDefinition);
 
+                // Check that System.ValueType has the method we're overriding.
+                Debug.Assert(valueTypeDefinition.BaseType.GetMethod(getFieldHelperMethod.Name, null) != null);
+
                 if (valueType != valueTypeDefinition)
                 {
                     yield return GetMethodForInstantiatedType(getFieldHelperMethod, (InstantiatedType)valueType);

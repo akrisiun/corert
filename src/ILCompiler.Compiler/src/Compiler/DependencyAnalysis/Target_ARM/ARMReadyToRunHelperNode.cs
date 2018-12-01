@@ -33,14 +33,13 @@ namespace ILCompiler.DependencyAnalysis
                         MethodDesc targetMethod = (MethodDesc)Target;
 
                         Debug.Assert(!targetMethod.OwningType.IsInterface);
-                        Debug.Assert(!targetMethod.CanMethodBeInSealedVTable());
 
                         int pointerSize = factory.Target.PointerSize;
 
                         int slot = 0;
                         if (!relocsOnly)
                         {
-                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod);
                             Debug.Assert(slot != -1);
                         }
 
@@ -163,13 +162,11 @@ namespace ILCompiler.DependencyAnalysis
 
                         if (target.TargetNeedsVTableLookup)
                         {
-                            Debug.Assert(!target.TargetMethod.CanMethodBeInSealedVTable());
-
                             encoder.EmitLDR(encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg1);
 
                             int slot = 0;
                             if (!relocsOnly)
-                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, target.TargetMethod, target.TargetMethod.OwningType);
+                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, target.TargetMethod);
 
                             Debug.Assert(slot != -1);
                             encoder.EmitLDR(encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg2,
@@ -215,9 +212,7 @@ namespace ILCompiler.DependencyAnalysis
 
                             encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Arg0);
 
-                            Debug.Assert(!targetMethod.CanMethodBeInSealedVTable());
-
-                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod);
                             Debug.Assert(slot != -1);
                             encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Result,
                                             ((short)(EETypeNode.GetVTableOffset(factory.Target.PointerSize) + (slot * factory.Target.PointerSize))));

@@ -70,11 +70,18 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
 
-        public override int ClassCode => -1846923013;
+        protected internal override int ClassCode => -1846923013;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return comparer.Compare(Method, ((UnboxingStubNode)other).Method);
+        }
+
+        int ISortableSymbolNode.ClassCode => ClassCode;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((ObjectNode)other, comparer);
         }
     }
 
@@ -115,9 +122,9 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => 1102274050;
+        protected internal override int ClassCode => 1102274050;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return _isEndSymbol.CompareTo(((WindowsUnboxingStubsRegionNode)other)._isEndSymbol);
         }

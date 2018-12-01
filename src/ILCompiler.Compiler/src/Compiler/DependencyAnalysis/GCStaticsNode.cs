@@ -12,7 +12,7 @@ using GCStaticRegionConstants = Internal.Runtime.GCStaticRegionConstants;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public class GCStaticsNode : ObjectNode, IExportableSymbolNode, ISortableSymbolNode, ISymbolNodeWithDebugInfo
+    public class GCStaticsNode : ObjectNode, IExportableSymbolNode, ISortableSymbolNode
     {
         private MetadataType _type;
         private List<PreInitFieldInfo> _preInitFieldInfos;
@@ -33,8 +33,6 @@ namespace ILCompiler.DependencyAnalysis
 
         public int Offset => 0;
         public MetadataType Type => _type;
-
-        public IDebugInfo DebugInfo => NullTypeIndexDebugInfo.Instance;
 
         public static string GetMangledName(TypeDesc type, NameMangler nameMangler)
         {
@@ -65,7 +63,7 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             dependencyList.Add(factory.GCStaticsRegion, "GCStatics Region");
-            if (factory.Target.Abi != TargetAbi.ProjectN)
+            if (factory.Target.Abi == TargetAbi.CoreRT)
             {
                 dependencyList.Add(GetGCStaticEETypeNode(factory), "GCStatic EEType");
                 if (_preInitFieldInfos != null)
@@ -132,11 +130,18 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public override int ClassCode => -522346696;
+        protected internal override int ClassCode => -522346696;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return comparer.Compare(_type, ((GCStaticsNode)other)._type);
+        }
+
+        int ISortableSymbolNode.ClassCode => ClassCode;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((ObjectNode)other, comparer);
         }
     }
 }

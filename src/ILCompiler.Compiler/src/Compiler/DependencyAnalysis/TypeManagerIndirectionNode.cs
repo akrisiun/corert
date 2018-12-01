@@ -34,6 +34,6 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => -2028598574;
+        protected internal override int ClassCode => -2028598574;
     }
 }

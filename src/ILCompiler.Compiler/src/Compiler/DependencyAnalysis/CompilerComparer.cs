@@ -10,9 +10,9 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public class CompilerComparer : TypeSystemComparer, IComparer<ISortableNode>
+    public class CompilerComparer : TypeSystemComparer, IComparer<ISortableSymbolNode>
     {
-        public int Compare(ISortableNode x, ISortableNode y)
+        public int Compare(ISortableSymbolNode x, ISortableSymbolNode y)
         {
             if (x == y)
             {
@@ -35,7 +35,7 @@ namespace ILCompiler.DependencyAnalysis
             else
             {
                 Debug.Assert(x.GetType() != y.GetType());
-                return codeY > codeX ? -1 : 1;
+                return codeX > codeY ? -1 : 1;
             }
         }
     }

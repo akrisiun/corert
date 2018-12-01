@@ -148,6 +148,7 @@ namespace Internal.TypeSystem.Interop
         public NativeStructType(ModuleDesc owningModule, MetadataType managedStructType, InteropStateManager interopStateManager)
         {
             Debug.Assert(managedStructType.IsTypeDefinition);
+            Debug.Assert(managedStructType.IsValueType);
             Debug.Assert(!managedStructType.IsGenericDefinition);
 
             Module = owningModule;
@@ -300,7 +301,7 @@ namespace Internal.TypeSystem.Interop
             }
 
             flags |= TypeFlags.HasFinalizerComputed;
-            flags |= TypeFlags.AttributeCacheComputed;
+            flags |= TypeFlags.IsByRefLikeComputed;
 
             return flags;
         }

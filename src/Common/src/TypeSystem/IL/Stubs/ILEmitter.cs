@@ -253,8 +253,6 @@ namespace Internal.IL.Stubs
                     break;
                 case TypeFlags.ValueType:
                 case TypeFlags.Nullable:
-                case TypeFlags.SignatureMethodVariable:
-                case TypeFlags.SignatureTypeVariable:
                     Emit(ILOpcode.ldobj, _emitter.NewToken(type));
                     break;
                 default:

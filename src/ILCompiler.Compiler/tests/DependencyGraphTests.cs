@@ -64,7 +64,7 @@ namespace ILCompiler.Compiler.Tests
             //
 
             var context = (CompilerTypeSystemContext)method.Context;
-            CompilationModuleGroup compilationGroup = new SingleFileCompilationModuleGroup();
+            CompilationModuleGroup compilationGroup = new SingleFileCompilationModuleGroup(context);
 
             CompilationBuilder builder = new RyuJitCompilationBuilder(context, compilationGroup);
             IILScanner scanner = builder.GetILScannerBuilder()

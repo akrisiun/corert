@@ -32,7 +32,6 @@ namespace ILCompiler.DependencyAnalysis
                         MethodDesc targetMethod = (MethodDesc)Target;
 
                         Debug.Assert(!targetMethod.OwningType.IsInterface);
-                        Debug.Assert(!targetMethod.CanMethodBeInSealedVTable());
 
                         AddrMode loadFromThisPtr = new AddrMode(encoder.TargetRegister.Arg0, null, 0, 0, AddrModeSize.Int64);
                         encoder.EmitMOV(encoder.TargetRegister.Result, ref loadFromThisPtr);
@@ -42,7 +41,7 @@ namespace ILCompiler.DependencyAnalysis
                         int slot = 0;
                         if (!relocsOnly)
                         {
-                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod);
                             Debug.Assert(slot != -1);
                         }
                         Debug.Assert(((INodeWithDebugInfo)this).DebugLocInfos[1].NativeOffset == encoder.Builder.CountBytes);
@@ -127,11 +126,7 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             encoder.EmitLEAQ(encoder.TargetRegister.Arg2, factory.TypeNonGCStaticsSymbol(target), - NonGCStaticsNode.GetClassConstructorContextStorageSize(factory.Target, target));
-
-                            AddrMode initialized = new AddrMode(encoder.TargetRegister.Arg2, null, factory.Target.PointerSize, 0, AddrModeSize.Int32);
-                            encoder.EmitCMP(ref initialized, 1);
-                            encoder.EmitJE(factory.HelperEntrypoint(HelperEntrypoint.GetThreadStaticBaseForType));
-
+                            // TODO: performance optimization - inline the check verifying whether we need to trigger the cctor
                             encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase));
                         }
                     }
@@ -172,14 +167,12 @@ namespace ILCompiler.DependencyAnalysis
 
                         if (target.TargetNeedsVTableLookup)
                         {
-                            Debug.Assert(!target.TargetMethod.CanMethodBeInSealedVTable());
-
                             AddrMode loadFromThisPtr = new AddrMode(encoder.TargetRegister.Arg1, null, 0, 0, AddrModeSize.Int64);
                             encoder.EmitMOV(encoder.TargetRegister.Arg2, ref loadFromThisPtr);
 
                             int slot = 0;
                             if (!relocsOnly)
-                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, target.TargetMethod, target.TargetMethod.OwningType);
+                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, target.TargetMethod);
 
                             Debug.Assert(slot != -1);
                             AddrMode loadFromSlot = new AddrMode(encoder.TargetRegister.Arg2, null, EETypeNode.GetVTableOffset(factory.Target.PointerSize) + (slot * factory.Target.PointerSize), 0, AddrModeSize.Int64);
@@ -221,9 +214,7 @@ namespace ILCompiler.DependencyAnalysis
                             AddrMode loadFromThisPtr = new AddrMode(encoder.TargetRegister.Arg0, null, 0, 0, AddrModeSize.Int64);
                             encoder.EmitMOV(encoder.TargetRegister.Result, ref loadFromThisPtr);
 
-                            Debug.Assert(!targetMethod.CanMethodBeInSealedVTable());
-
-                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod);
                             Debug.Assert(slot != -1);
                             AddrMode loadFromSlot = new AddrMode(encoder.TargetRegister.Result, null, EETypeNode.GetVTableOffset(factory.Target.PointerSize) + (slot * factory.Target.PointerSize), 0, AddrModeSize.Int64);
                             encoder.EmitMOV(encoder.TargetRegister.Result, ref loadFromSlot);

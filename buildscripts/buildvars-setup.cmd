@@ -19,8 +19,6 @@ set "__LogsDir=%__RootBinDir%\Logs"
 set __SkipTestBuild=
 set "__DotNetCliPath=%__ProjectDir%\Tools\dotnetcli"
 
-set __ObjWriterBuild=0
-
 :Arg_Loop
 if "%1" == "" goto ArgsDone
 
@@ -43,10 +41,9 @@ if /i "%1" == "clean"   (set __CleanBuild=1&shift&goto Arg_Loop)
 
 if /i "%1" == "skiptests" (set __SkipTests=1&shift&goto Arg_Loop)
 if /i "%1" == "skipvsdev" (set __SkipVsDev=1&shift&goto Arg_Loop)
-if /i "%1" == "objwriter" (set __ObjWriterBuild=1&set "__ExtraMsBuildParams=%__ExtraMsBuildParams% /p:ObjWriterBuild=true"&shift&goto Arg_Loop)
 if /i "%1" == "/dotnetclipath" (set __DotNetCliPath=%2&shift&shift&goto Arg_Loop)
 
-if /i "%1" == "/officialbuildid" (set "__ExtraMsBuildParams=%__ExtraMsBuildParams% /p:OfficialBuildId=%2"&shift&shift&goto Arg_Loop)
+if /i "%1" == "/officialbuildid" (set "__ExtraMsBuildParams=/p:OfficialBuildId=%2"&shift&shift&goto Arg_Loop)
 
 echo Invalid command line argument: %1
 exit /b 1

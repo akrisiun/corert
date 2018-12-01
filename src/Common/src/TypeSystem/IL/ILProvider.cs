@@ -78,16 +78,6 @@ namespace Internal.IL
                             return GetCanonTypeIntrinsic.EmitIL(method);
                     }
                     break;
-                case "EEType":
-                    {
-                        if (owningType.Namespace == "Internal.Runtime" && method.Name == "get_SupportsRelativePointers")
-                        {
-                            ILOpcode value = method.Context.Target.SupportsRelativePointers ?
-                                ILOpcode.ldc_i4_1 : ILOpcode.ldc_i4_0;
-                            return new ILStubMethodIL(method, new byte[] { (byte)value, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
-                        }
-                    }
-                    break;
             }
 
             return null;
@@ -212,7 +202,7 @@ namespace Internal.IL
                                 TypeSystemContext context = elementType.Context;
                                 MetadataType helperType = context.SystemModule.GetKnownType("Internal.IntrinsicSupport", "EqualityComparerHelpers");
 
-                                MethodDesc methodToCall;
+                                MethodDesc methodToCall = null;
                                 if (elementType.IsEnum)
                                 {
                                     methodToCall = helperType.GetKnownMethod("EnumOnlyEquals", null).MakeInstantiatedMethod(elementType);
@@ -225,19 +215,18 @@ namespace Internal.IL
                                 {
                                     methodToCall = helperType.GetKnownMethod("StructOnlyEqualsIEquatable", null).MakeInstantiatedMethod(elementType);
                                 }
-                                else
-                                {
-                                    methodToCall = helperType.GetKnownMethod("StructOnlyNormalEquals", null).MakeInstantiatedMethod(elementType);
-                                }
 
-                                return new ILStubMethodIL(method, new byte[]
+                                if (methodToCall != null)
                                 {
-                                    (byte)ILOpcode.ldarg_0,
-                                    (byte)ILOpcode.ldarg_1,
-                                    (byte)ILOpcode.call, 1, 0, 0, 0,
-                                    (byte)ILOpcode.ret
-                                },
-                                Array.Empty<LocalVariableDefinition>(), new object[] { methodToCall });
+                                    return new ILStubMethodIL(method, new byte[]
+                                    {
+                                        (byte)ILOpcode.ldarg_0,
+                                        (byte)ILOpcode.ldarg_1,
+                                        (byte)ILOpcode.call, 1, 0, 0, 0,
+                                        (byte)ILOpcode.ret
+                                    },
+                                    Array.Empty<LocalVariableDefinition>(), new object[] { methodToCall });
+                                }
                             }
                         }
                     }
@@ -257,7 +246,7 @@ namespace Internal.IL
                 if (((MetadataType)method.OwningType).HasCustomAttribute("System.Runtime.InteropServices", "McgIntrinsicsAttribute"))
                 {
                     var name = method.Name;
-                    if (name == "Call" || name.StartsWith("StdCall"))
+                    if (name == "Call")
                     {
                         return CalliIntrinsic.EmitIL(method);
                     }

@@ -97,15 +97,22 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        public override int ClassCode => 190463489;
+        protected internal override int ClassCode => 190463489;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             var compare = _isUnboxingStub.CompareTo(((FatFunctionPointerNode)other)._isUnboxingStub);
             if (compare != 0)
                 return compare;
 
             return comparer.Compare(Method, ((FatFunctionPointerNode)other).Method);
+        }
+
+        int ISortableSymbolNode.ClassCode => ClassCode;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((ObjectNode)other, comparer);
         }
     }
 }

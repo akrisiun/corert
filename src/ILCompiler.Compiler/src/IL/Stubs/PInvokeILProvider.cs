@@ -29,10 +29,5 @@ namespace Internal.IL
         {
             return PInvokeILEmitter.EmitIL(method, _pInvokeILEmitterConfiguration, _interopStateManager);
         }
-
-        public MethodDesc GetCalliStub(MethodSignature signature)
-        {
-            return _interopStateManager.GetPInvokeCalliStub(signature);
-        }
     }
 }

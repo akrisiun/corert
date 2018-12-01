@@ -22,7 +22,6 @@ namespace Internal.TypeSystem
         private readonly PInvokeDelegateWrapperHashtable _pInvokeDelegateWrapperHashtable;
         private readonly InlineArrayHashTable _inlineArrayHashtable;
         private readonly PInvokeLazyFixupFieldHashtable _pInvokeLazyFixupFieldHashtable;
-        private readonly PInvokeCalliHashtable _pInvokeCalliHashtable;
 
         public InteropStateManager(ModuleDesc generatedAssembly)
         {
@@ -34,7 +33,6 @@ namespace Internal.TypeSystem
             _pInvokeDelegateWrapperHashtable = new PInvokeDelegateWrapperHashtable(this, _generatedAssembly);
             _inlineArrayHashtable = new InlineArrayHashTable(this, _generatedAssembly);
             _pInvokeLazyFixupFieldHashtable = new PInvokeLazyFixupFieldHashtable(_generatedAssembly.GetGlobalModuleType());
-            _pInvokeCalliHashtable = new PInvokeCalliHashtable(this, _generatedAssembly.GetGlobalModuleType());
         }
         //
         // Delegate Marshalling Stubs
@@ -157,7 +155,8 @@ namespace Internal.TypeSystem
 
             Debug.Assert(managedType is MetadataType);
 
-            var methodKey = new StructMarshallingThunkKey((MetadataType)managedType, StructMarshallingThunkType.NativeToManaged);
+
+            var methodKey = new StructMarshallingThunkKey((MetadataType)managedType, StructMarshallingThunkType.NativeToManage);
             return _structMarshallingThunkHashtable.GetOrCreateValue(methodKey);
         }
 
@@ -173,6 +172,7 @@ namespace Internal.TypeSystem
 
             Debug.Assert(managedType is MetadataType);
 
+
             var methodKey = new StructMarshallingThunkKey((MetadataType)managedType, StructMarshallingThunkType.Cleanup);
             return _structMarshallingThunkHashtable.GetOrCreateValue(methodKey);
         }
@@ -185,11 +185,6 @@ namespace Internal.TypeSystem
         public FieldDesc GetPInvokeLazyFixupField(MethodDesc method)
         {
             return _pInvokeLazyFixupFieldHashtable.GetOrCreateValue(method);
-        }
-
-        public MethodDesc GetPInvokeCalliStub(MethodSignature signature)
-        {
-            return _pInvokeCalliHashtable.GetOrCreateValue(signature);
         }
 
         private class NativeStructTypeHashtable : LockFreeReaderHashtable<MetadataType, NativeStructType>
@@ -475,43 +470,6 @@ namespace Internal.TypeSystem
 
             public PInvokeLazyFixupFieldHashtable(DefType owningType)
             {
-                _owningType = owningType;
-            }
-        }
-
-        private class PInvokeCalliHashtable : LockFreeReaderHashtable<MethodSignature, CalliMarshallingMethodThunk>
-        {
-            private readonly InteropStateManager _interopStateManager;
-            private readonly TypeDesc _owningType;
-
-            protected override int GetKeyHashCode(MethodSignature key)
-            {
-                return key.GetHashCode();
-            }
-
-            protected override int GetValueHashCode(CalliMarshallingMethodThunk value)
-            {
-                return value.TargetSignature.GetHashCode();
-            }
-
-            protected override bool CompareKeyToValue(MethodSignature key, CalliMarshallingMethodThunk value)
-            {
-                return key.Equals(value.TargetSignature);
-            }
-
-            protected override bool CompareValueToValue(CalliMarshallingMethodThunk value1, CalliMarshallingMethodThunk value2)
-            {
-                return value1.TargetSignature.Equals(value2.TargetSignature);
-            }
-
-            protected override CalliMarshallingMethodThunk CreateValueFromKey(MethodSignature key)
-            {
-                return new CalliMarshallingMethodThunk(key, _owningType, _interopStateManager);
-            }
-
-            public PInvokeCalliHashtable(InteropStateManager interopStateManager, TypeDesc owningType)
-            {
-                _interopStateManager = interopStateManager;
                 _owningType = owningType;
             }
         }

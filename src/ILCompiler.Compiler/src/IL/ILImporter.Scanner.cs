@@ -19,7 +19,6 @@ namespace Internal.IL
     partial class ILImporter
     {
         private readonly MethodIL _methodIL;
-        private readonly MethodIL _canonMethodIL;
         private readonly ILScanner _compilation;
         private readonly ILScanNodeFactory _factory;
 
@@ -84,8 +83,6 @@ namespace Internal.IL
             _factory = (ILScanNodeFactory)compilation.NodeFactory;
             
             _ilBytes = methodIL.GetILBytes();
-
-            _canonMethodIL = methodIL;
 
             // Get the runtime determined method IL so that this works right in shared code
             // and tokens in shared code resolve to runtime determined types.
@@ -269,10 +266,11 @@ namespace Internal.IL
         
         private void ImportCall(ILOpcode opcode, int token)
         {
-            // We get both the canonical and runtime determined form - JitInterface mostly operates
-            // on the canonical form.
+            // Strip runtime determined characteristics off of the method (because that's how RyuJIT operates)
             var runtimeDeterminedMethod = (MethodDesc)_methodIL.GetObject(token);
-            var method = (MethodDesc)_canonMethodIL.GetObject(token);
+            MethodDesc method = runtimeDeterminedMethod;
+            if (runtimeDeterminedMethod.IsRuntimeDeterminedExactMethod)
+                method = runtimeDeterminedMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
 
             if (method.IsRawPInvoke())
             {
@@ -356,14 +354,10 @@ namespace Internal.IL
                 }
             }
 
-            if (method.OwningType.IsDelegate && method.Name == "Invoke" &&
-                opcode != ILOpcode.ldftn && opcode != ILOpcode.ldvirtftn)
+            if (method.OwningType.IsDelegate && method.Name == "Invoke")
             {
-                // This call is expanded as an intrinsic; it's not an actual function call.
-                // Before codegen realizes this is an intrinsic, it might still ask questions about
-                // the vtable of this virtual method, so let's make sure it's marked in the scanner's
-                // dependency graph.
-                _dependencies.Add(_factory.VTable(method.OwningType), reason);
+                // TODO: might not want to do this if scanning for reflection.
+                // This is expanded as an intrinsic, not a function call.
                 return;
             }
 

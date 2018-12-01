@@ -51,7 +51,7 @@ namespace ILCompiler.DependencyAnalysis
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
-            objData.RequireInitialAlignment(1);
+            objData.RequireInitialPointerAlignment();
             objData.AddSymbol(this);
 
             if (!relocsOnly)
@@ -63,9 +63,9 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => 821718028;
+        protected internal override int ClassCode => 821718028;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return SortableDependencyNode.CompareImpl(_owner, ((EETypeOptionalFieldsNode)other)._owner, comparer);
         }

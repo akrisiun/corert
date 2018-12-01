@@ -33,7 +33,8 @@ namespace TypeSystemTests
             // Verify that we get just type definitions.
             Assert.NotNull(t);
             Assert.True(t.IsTypeDefinition);
-            Assert.Equal(1, t.Instantiation.Length);
+            Assert.NotNull(t.Instantiation);
+            Assert.Equal(t.Instantiation.Length, 1);
             Assert.True(t.Instantiation[0].IsTypeDefinition);
 
             // Verify that we got a method definition
@@ -49,13 +50,14 @@ namespace TypeSystemTests
             // Verify properties of the instantiated type
             Assert.NotNull(instantiatedType);
             Assert.False(instantiatedType.IsTypeDefinition);
-            Assert.Equal(1, instantiatedType.Instantiation.Length);
-            Assert.Equal(_context.GetWellKnownType(WellKnownType.Int32), instantiatedType.Instantiation[0]);
+            Assert.NotNull(instantiatedType.Instantiation);
+            Assert.Equal(instantiatedType.Instantiation.Length, 1);
+            Assert.Equal(instantiatedType.Instantiation[0], _context.GetWellKnownType(WellKnownType.Int32));
 
             // Verify that we get an instantiated method with the proper signature
             MethodDesc fooInstantiatedMethod = instantiatedType.GetMethods().First(m => m.Name == "Foo");
             Assert.False(fooInstantiatedMethod.IsTypicalMethodDefinition);
-            Assert.Equal(_context.GetWellKnownType(WellKnownType.Int32), fooInstantiatedMethod.Signature.ReturnType);
+            Assert.Equal(fooInstantiatedMethod.Signature.ReturnType, _context.GetWellKnownType(WellKnownType.Int32));
             Assert.Same(fooInstantiatedMethod.GetTypicalMethodDefinition(), fooMethod);
             // This is not a generic method, so they should be the same
             Assert.Same(fooInstantiatedMethod.GetMethodDefinition(), fooInstantiatedMethod);
@@ -135,16 +137,16 @@ namespace TypeSystemTests
             InstantiatedType genericOfIntString = genericOpenType.MakeInstantiatedType(intType, stringType);
             InstantiatedType genericOfIntObject = genericOpenType.MakeInstantiatedType(intType, objectType);
 
-            Assert.True(genericOfCharObject.IsConstructedOverType(new TypeDesc[] { charType }));
-            Assert.True(genericOfCharObject.IsConstructedOverType(new TypeDesc[] { objectType }));
-            Assert.False(genericOfCharObject.IsConstructedOverType(new TypeDesc[] { intType }));
-            Assert.False(genericOfCharObject.IsConstructedOverType(new TypeDesc[] { stringType }));
-            Assert.False(genericOfCharObject.IsConstructedOverType(new TypeDesc[] { genericOpenType }));
+            Assert.Equal(true, genericOfCharObject.IsConstructedOverType(new TypeDesc[] { charType }));
+            Assert.Equal(true, genericOfCharObject.IsConstructedOverType(new TypeDesc[] { objectType }));
+            Assert.Equal(false, genericOfCharObject.IsConstructedOverType(new TypeDesc[] { intType }));
+            Assert.Equal(false, genericOfCharObject.IsConstructedOverType(new TypeDesc[] { stringType }));
+            Assert.Equal(false, genericOfCharObject.IsConstructedOverType(new TypeDesc[] { genericOpenType }));
 
-            Assert.True(genericOfCharString.IsConstructedOverType(new TypeDesc[] { charType }));
-            Assert.False(genericOfCharString.IsConstructedOverType(new TypeDesc[] { objectType }));
-            Assert.False(genericOfCharString.IsConstructedOverType(new TypeDesc[] { intType }));
-            Assert.True(genericOfCharString.IsConstructedOverType(new TypeDesc[] { stringType }));
+            Assert.Equal(true, genericOfCharString.IsConstructedOverType(new TypeDesc[] { charType }));
+            Assert.Equal(false, genericOfCharString.IsConstructedOverType(new TypeDesc[] { objectType }));
+            Assert.Equal(false, genericOfCharString.IsConstructedOverType(new TypeDesc[] { intType }));
+            Assert.Equal(true, genericOfCharString.IsConstructedOverType(new TypeDesc[] { stringType }));
 
             // Test direct replacement
             TypeDesc testDirectReplaceAllTypes = genericOfCharObject.ReplaceTypesInConstructionOfType(new TypeDesc[] { charType, objectType }, new TypeDesc[] { intType, stringType });
@@ -195,8 +197,8 @@ namespace TypeSystemTests
             TypeDesc testReplaceTypeInPointer = charPointer.ReplaceTypesInConstructionOfType(new TypeDesc[] { charType }, new TypeDesc[] { intType });
             Assert.Equal(intPointer, testReplaceTypeInPointer);
 
-            Assert.True(charPointer.IsConstructedOverType(new TypeDesc[] { charType }));
-            Assert.False(charPointer.IsConstructedOverType(new TypeDesc[] { intType }));
+            Assert.Equal(true, charPointer.IsConstructedOverType(new TypeDesc[] { charType }));
+            Assert.Equal(false, charPointer.IsConstructedOverType(new TypeDesc[] { intType }));
 
             // Test byref
             TypeDesc charByRef = _context.GetByRefType(charType);
@@ -204,13 +206,13 @@ namespace TypeSystemTests
             TypeDesc testReplaceTypeInByRef = charByRef.ReplaceTypesInConstructionOfType(new TypeDesc[] { charType }, new TypeDesc[] { intType });
             Assert.Equal(intByRef, testReplaceTypeInByRef);
 
-            Assert.True(charByRef.IsConstructedOverType(new TypeDesc[] { charType }));
-            Assert.False(charByRef.IsConstructedOverType(new TypeDesc[] { intType }));
+            Assert.Equal(true, charByRef.IsConstructedOverType(new TypeDesc[] { charType }));
+            Assert.Equal(false, charByRef.IsConstructedOverType(new TypeDesc[] { intType }));
 
             // Test replace type entirely
             TypeDesc testReplaceTypeEntirely = charByRef.ReplaceTypesInConstructionOfType(new TypeDesc[] { charByRef }, new TypeDesc[] { intByRef });
             Assert.Equal(intByRef, testReplaceTypeEntirely);
-            Assert.True(charByRef.IsConstructedOverType(new TypeDesc[] { charByRef }));
+            Assert.Equal(true, charByRef.IsConstructedOverType(new TypeDesc[] { charByRef }));
         }
 
         [Fact]

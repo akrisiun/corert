@@ -17,7 +17,7 @@ namespace ILCompiler
         public override bool SupportsReflection => false;
 
         public EmptyMetadataManager(CompilerTypeSystemContext typeSystemContext)
-            : base(typeSystemContext, new FullyBlockedMetadataPolicy(), new FullyBlockedManifestResourcePolicy(), new NoDynamicInvokeThunkGenerationPolicy())
+            : base(typeSystemContext, new FullyBlockedMetadataPolicy())
         {
         }
 
@@ -62,6 +62,15 @@ namespace ILCompiler
         }
 
         /// <summary>
+        /// Is there a reflection invoke stub for a method that is invokable?
+        /// </summary>
+        public override bool HasReflectionInvokeStubForInvokableMethod(MethodDesc method)
+        {
+            Debug.Assert(IsReflectionInvokable(method));
+            return false;
+        }
+
+        /// <summary>
         /// Gets a stub that can be used to reflection-invoke a method with a given signature.
         /// </summary>
         public override MethodDesc GetCanonicalReflectionInvokeStub(MethodDesc method)
@@ -96,14 +105,6 @@ namespace ILCompiler
             public override bool IsBlocked(FieldDesc field)
             {
                 Debug.Assert(field.IsTypicalFieldDefinition);
-                return true;
-            }
-        }
-
-        private sealed class FullyBlockedManifestResourcePolicy : ManifestResourceBlockingPolicy
-        {
-            public override bool IsManifestResourceBlocked(ModuleDesc module, string resourceName)
-            {
                 return true;
             }
         }

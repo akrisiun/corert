@@ -12,7 +12,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract class SortableDependencyNode : DependencyNodeCore<NodeFactory>, ISortableNode
+    public abstract class SortableDependencyNode : DependencyNodeCore<NodeFactory>
     {
 #if !SUPPORT_JIT
         /// <summary>
@@ -29,10 +29,10 @@ namespace ILCompiler.DependencyAnalysis
         /// This is really just a number, ideally produced by "new Random().Next(int.MinValue, int.MaxValue)".
         /// If two manage to conflict (which is pretty unlikely), just make a new one...
         /// </remarks>
-        public abstract int ClassCode { get; }
-        
+        protected internal abstract int ClassCode { get; }
+
         // Note to implementers: the type of `other` is actually the same as the type of `this`.
-        public virtual int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal virtual int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             throw new NotImplementedException("Multiple nodes of this type are not supported");
         }
@@ -75,18 +75,12 @@ namespace ILCompiler.DependencyAnalysis
             BlockReflectionTypeMapNode,
             StaticsInfoHashtableNode,
             ReflectionVirtualInvokeMapNode,
+            ExternalReferencesTableNode,
             ArrayOfEmbeddedPointersNode,
             DefaultConstructorMapNode,
-            ExternalReferencesTableNode,
             StackTraceEmbeddedMetadataNode,
             StackTraceMethodMappingNode,
-            ArrayOfEmbeddedDataNode,
-            WindowsDebugNeedTypeIndicesStoreNode,
-            WindowsDebugMethodSignatureMapSectionNode,
-            WindowsDebugTypeSignatureMapSectionNode,
-            WindowsDebugManagedNativeDictionaryInfoSectionNode,
-            WindowsDebugTypeRecordsSectionNode,
-            WindowsDebugPseudoAssemblySectionNode,
+            ArrayOfEmbeddedDataNode
         }
 
         public class EmbeddedObjectNodeComparer : IComparer<EmbeddedObjectNode>
@@ -165,7 +159,7 @@ namespace ILCompiler.DependencyAnalysis
                 else
                 {
                     Debug.Assert(x.GetType() != y.GetType());
-                    return codeY > codeX ? -1 : 1;
+                    return codeX - codeY;
                 }
             }
             else

@@ -108,6 +108,6 @@ namespace ILCompiler.DependencyAnalysis
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;
 
-        public override int ClassCode => (int)ObjectNodeOrder.ArrayOfEmbeddedDataNode;
+        protected internal override int ClassCode => (int)ObjectNodeOrder.ArrayOfEmbeddedDataNode;
     }
 }

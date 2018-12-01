@@ -101,8 +101,7 @@ namespace Internal.TypeSystem
     {
         public StaticsBlock NonGcStatics;
         public StaticsBlock GcStatics;
-        public StaticsBlock ThreadNonGcStatics;
-        public StaticsBlock ThreadGcStatics;
+        public StaticsBlock ThreadStatics;
 
         /// <summary>
         /// If Offsets is non-null, then all field based layout is complete.

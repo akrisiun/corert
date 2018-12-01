@@ -185,8 +185,7 @@ namespace Internal.TypeSystem
             ComputedStaticFieldLayout result;
             result.GcStatics = new StaticsBlock();
             result.NonGcStatics = new StaticsBlock();
-            result.ThreadGcStatics = new StaticsBlock();
-            result.ThreadNonGcStatics = new StaticsBlock();
+            result.ThreadStatics = new StaticsBlock();
 
             if (numStaticFields == 0)
             {
@@ -232,12 +231,7 @@ namespace Internal.TypeSystem
         private ref StaticsBlock GetStaticsBlockForField(ref ComputedStaticFieldLayout layout, FieldDesc field)
         {
             if (field.IsThreadStatic)
-            {
-                if (field.HasGCStaticBase)
-                    return ref layout.ThreadGcStatics;
-                else
-                    return ref layout.ThreadNonGcStatics;
-            }
+                return ref layout.ThreadStatics;
             else if (field.HasGCStaticBase)
                 return ref layout.GcStatics;
             else
@@ -299,7 +293,7 @@ namespace Internal.TypeSystem
 
             var layoutMetadata = type.GetClassLayout();
 
-            int packingSize = ComputePackingSize(type, layoutMetadata);
+            int packingSize = ComputePackingSize(type);
             LayoutInt largestAlignmentRequired = LayoutInt.One;
 
             var offsets = new FieldAndOffset[numInstanceFields];
@@ -359,11 +353,9 @@ namespace Internal.TypeSystem
             // For types inheriting from another type, field offsets continue on from where they left off
             LayoutInt cumulativeInstanceFieldPos = ComputeBytesUsedInParentType(type);
 
-            var layoutMetadata = type.GetClassLayout();
-
             LayoutInt largestAlignmentRequirement = LayoutInt.One;
             int fieldOrdinal = 0;
-            int packingSize = ComputePackingSize(type, layoutMetadata);
+            int packingSize = ComputePackingSize(type);
 
             foreach (var field in type.GetFields())
             {
@@ -383,6 +375,7 @@ namespace Internal.TypeSystem
 
             if (type.IsValueType)
             {
+                var layoutMetadata = type.GetClassLayout();
                 cumulativeInstanceFieldPos = LayoutInt.Max(cumulativeInstanceFieldPos, new LayoutInt(layoutMetadata.Size));
             }
 
@@ -449,8 +442,10 @@ namespace Internal.TypeSystem
             return result;
         }
 
-        private static int ComputePackingSize(MetadataType type, ClassLayoutMetadata layoutMetadata)
+        private static int ComputePackingSize(MetadataType type)
         {
+            var layoutMetadata = type.GetClassLayout();
+
             // If a type contains pointers then the metadata specified packing size is ignored (On desktop this is disqualification from ManagedSequential)
             if (layoutMetadata.PackingSize == 0 || type.ContainsGCPointers)
                 return type.Context.Target.DefaultPackingSize;

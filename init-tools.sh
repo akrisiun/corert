@@ -42,7 +42,9 @@ if [ -z "$__DOTNET_PKG" ]; then
             if [ -e /etc/os-release ]; then
                 source /etc/os-release
                 if [[ $ID == "alpine" ]]; then
-                    __PKG_RID="linux-musl"
+                    # remove the last version digit
+                    VERSION_ID=${VERSION_ID%.*}
+                    __PKG_RID=alpine.$VERSION_ID
                 fi
 
             elif [ -e /etc/redhat-release ]; then
@@ -60,8 +62,7 @@ if [ -z "$__DOTNET_PKG" ]; then
             __PKG_RID=linux
             ;;
   esac
-  __PKG_RID=$__PKG_RID-$__HostArch
-  __DOTNET_PKG=dotnet-sdk-${__DOTNET_TOOLS_VERSION}-$__PKG_RID
+  __DOTNET_PKG=dotnet-sdk-${__DOTNET_TOOLS_VERSION}-$__PKG_RID-$__HostArch
 fi
 
 display_error_message()
@@ -146,7 +147,10 @@ if [ ! -e $__INIT_TOOLS_DONE_MARKER ]; then
     ls $__scriptpath/Tools/*.sh | xargs chmod +x
     ls $__scriptpath/Tools/scripts/docker/*.sh | xargs chmod +x
 
-    Tools/crossgen.sh $__scriptpath/Tools $__PKG_RID
+    Tools/crossgen.sh $__scriptpath/Tools
+
+    # CoreRT does not use special copy of the shared runtime for testing
+    cp $__TOOLRUNTIME_DIR/csc.runtimeconfig.json $__TOOLRUNTIME_DIR/xunit.console.netcore.runtimeconfig.json
 
     mkdir -p $__INIT_TOOLS_DONE_MARKER_DIR
     touch $__INIT_TOOLS_DONE_MARKER

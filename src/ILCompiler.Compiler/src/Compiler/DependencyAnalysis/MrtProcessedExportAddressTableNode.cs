@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 using Internal.Text;
@@ -25,8 +24,7 @@ namespace ILCompiler.DependencyAnalysis
             _factory = factory;
         }
 
-        public event Func<uint, IExportableSymbolNode, uint> ReportExportedItem;
-        public event Func<uint> GetInitialExportOrdinal;
+        public event Action<int, IExportableSymbolNode> ReportExportedItem;
 
         public void AddExportableSymbol(IExportableSymbolNode exportableSymbol)
         {
@@ -70,13 +68,6 @@ namespace ILCompiler.DependencyAnalysis
             builder.RequireInitialPointerAlignment();
             builder.AddSymbol(this);
 
-            //
-            // Entries in the export table need to be sorted by ordinals. When compiling using baseline TOC files, we reuse
-            // the ordinals from the baseline for sorting, otherwise we start assigning new sequential ordinals. Export entries that do
-            // not exist in the baseline will get new sequential ordinals, but for determinism, they are also pre-sorted using the
-            // CompilerComparer logic
-            //
-
             ISortableSymbolNode[] symbolNodes = new ISortableSymbolNode[_exportableSymbols.Count];
             _exportableSymbols.CopyTo(symbolNodes);
             Array.Sort(symbolNodes, new CompilerComparer());
@@ -84,29 +75,30 @@ namespace ILCompiler.DependencyAnalysis
             builder.EmitInt(1); // Export table version 1
             builder.EmitInt(symbolNodes.Length); // Count of exported symbols in this table
 
-            uint index = GetInitialExportOrdinal == null ? 1 : GetInitialExportOrdinal();
-            Dictionary<uint, ISortableSymbolNode> symbolsOridnalMap = new Dictionary<uint, ISortableSymbolNode>();
+            int index = 1;
             foreach (ISortableSymbolNode symbol in symbolNodes)
             {
-                uint indexUsed = ReportExportedItem.Invoke(index, (IExportableSymbolNode)symbol);
-                symbolsOridnalMap.Add(indexUsed, symbol);
-                index += (indexUsed == index ? (uint)1 : 0);
-            }
-
-            foreach (uint ordinal in symbolsOridnalMap.Keys.OrderBy(o => o))
-            {
-                builder.EmitReloc(symbolsOridnalMap[ordinal], RelocType.IMAGE_REL_BASED_REL32);
+                builder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_REL32);
+                ReportExportedItem?.Invoke(index, (IExportableSymbolNode)symbol);
+                index++;
             }
 
             return builder.ToObjectData();
         }
 
-        public override int ClassCode => 40423846;
+        protected internal override int ClassCode => 40423846;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             Debug.Assert(Object.ReferenceEquals(other, this));
             return 0; // There should only ever be one of these per dependency graph
+        }
+
+        int ISortableSymbolNode.ClassCode => ClassCode;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((ObjectNode)other, comparer);
         }
     }
 }

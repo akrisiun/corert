@@ -57,7 +57,7 @@ namespace MetadataTransformTests
             return scope;
         }
 
-        private void CheckTypeDefinitionForProperWinRTHome(TypeDefinition typeDefinition, string module)
+        public void CheckTypeDefinitionForProperWinRTHome(TypeDefinition typeDefinition, string module)
         {
             ScopeDefinition scope = GetScopeDefinitionOfType(typeDefinition);
             Assert.Equal(module, scope.Name.Value);
@@ -66,7 +66,7 @@ namespace MetadataTransformTests
         }
 
 
-        private void CheckTypeReferenceForProperWinRTHome(TypeReference typeReference, string module)
+        public void CheckTypeReferenceForProperWinRTHome(TypeReference typeReference, string module)
         {
             ScopeReference scope = GetScopeReferenceOfType(typeReference);
             Assert.Equal(module, scope.Name.Value);

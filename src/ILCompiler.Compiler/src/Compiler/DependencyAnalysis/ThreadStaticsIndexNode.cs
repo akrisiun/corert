@@ -82,11 +82,18 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => -968500265;
+        protected internal override int ClassCode => -968500265;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return string.Compare(_prefix, ((ThreadStaticsIndexNode)other)._prefix);
+        }
+
+        int ISortableSymbolNode.ClassCode => ClassCode;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((ObjectNode)other, comparer);
         }
     }
 
@@ -175,9 +182,9 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => -754150753;
+        protected internal override int ClassCode => -754150753;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return string.Compare(_prefix, ((ThreadStaticsDirectoryNode)other)._prefix);
         }

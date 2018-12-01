@@ -47,24 +47,5 @@ namespace ILCompiler
                 }
             }
         }
-
-        partial class UnboxingThunk : IPrefixMangledMethod
-        {
-            MethodDesc IPrefixMangledMethod.BaseMethod
-            {
-                get
-                {
-                    return _targetMethod;
-                }
-            }
-
-            string IPrefixMangledMethod.Prefix
-            {
-                get
-                {
-                    return "unbox";
-                }
-            }
-        }
     }
 }

@@ -121,10 +121,7 @@ namespace Internal.Runtime.CompilerHelpers
             for (int i = 0; i < count; i++)
             {
                 if (pModuleHeaders[i] != IntPtr.Zero)
-                {
-                    modules[moduleIndex] = RuntimeImports.RhpCreateTypeManager(osModule, pModuleHeaders[i], pClasslibFunctions, nClasslibFunctions);
-                    moduleIndex++;
-                }
+                    modules[moduleIndex++] = RuntimeImports.RhpCreateTypeManager(osModule, pModuleHeaders[i], pClasslibFunctions, nClasslibFunctions);
             }
 
             return modules;
@@ -304,6 +301,6 @@ namespace Internal.Runtime.CompilerHelpers
     internal unsafe struct TypeManagerSlot
     {
         public TypeManagerHandle TypeManager;
-        public int ModuleIndex;
+        public Int32 ModuleIndex;
     }
 }

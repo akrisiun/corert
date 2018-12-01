@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 
 using Internal.IL;
 
@@ -12,10 +13,6 @@ namespace Internal.TypeSystem
     {
         private class DelegateInfoHashtable : LockFreeReaderHashtable<TypeDesc, DelegateInfo>
         {
-            private enum CoreLibSupportLevel { Unknown, Supported, Unsupported }
-
-            private CoreLibSupportLevel _supportLevel;
-
             protected override int GetKeyHashCode(TypeDesc key)
             {
                 return key.GetHashCode();
@@ -34,18 +31,7 @@ namespace Internal.TypeSystem
             }
             protected override DelegateInfo CreateValueFromKey(TypeDesc key)
             {
-                if (_supportLevel == CoreLibSupportLevel.Unknown)
-                {
-                    // Check if the core library supports dynamic invoke.
-                    _supportLevel = DelegateInfo.SupportsDynamicInvoke(key.Context) ?
-                        CoreLibSupportLevel.Supported : CoreLibSupportLevel.Unsupported;
-                }
-
-                DelegateFeature supportedFeatures = _supportLevel == CoreLibSupportLevel.Supported ?
-                    DelegateFeature.DynamicInvoke | DelegateFeature.ObjectArrayThunk : 0;
-
-
-                return new DelegateInfo(key, supportedFeatures);
+                return new DelegateInfo(key);
             }
         }
 

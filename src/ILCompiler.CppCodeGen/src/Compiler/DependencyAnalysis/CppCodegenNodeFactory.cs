@@ -40,7 +40,8 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override IMethodNode CreateUnboxingStubNode(MethodDesc method)
         {
-            return new CppUnboxingStubNode(method);
+            // TODO: this is wrong: this returns an assembly stub node
+            return new UnboxingStubNode(method, Target);
         }
 
         protected override ISymbolNode CreateReadyToRunHelperNode(ReadyToRunHelperKey helperCall)

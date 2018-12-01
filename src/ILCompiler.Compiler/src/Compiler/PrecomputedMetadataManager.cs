@@ -33,7 +33,6 @@ namespace ILCompiler
             public ImmutableArray<ModuleDesc> LocalMetadataModules = ImmutableArray<ModuleDesc>.Empty;
             public ImmutableArray<ModuleDesc> ExternalMetadataModules = ImmutableArray<ModuleDesc>.Empty;
             public List<MetadataType> TypesWithStrongMetadataMappings = new List<MetadataType>();
-            public Dictionary<MetadataType, int> WeakReflectedTypeMappings = new Dictionary<MetadataType, int>();
             public Dictionary<MetadataType, int> AllTypeMappings = new Dictionary<MetadataType, int>();
             public Dictionary<MethodDesc, int> MethodMappings = new Dictionary<MethodDesc, int>();
             public Dictionary<FieldDesc, int> FieldMappings = new Dictionary<FieldDesc, int>();
@@ -63,15 +62,9 @@ namespace ILCompiler
             IEnumerable<ModuleDesc> compilationModules,
             IEnumerable<ModuleDesc> inputMetadataOnlyAssemblies,
             byte[] metadataBlob,
-            StackTraceEmissionPolicy stackTraceEmissionPolicy,
-            ManifestResourceBlockingPolicy resourceBlockingPolicy,
-            bool disableInvokeThunks)
-            : base(typeSystemContext, new AttributeSpecifiedBlockingPolicy(), resourceBlockingPolicy,
-                  disableInvokeThunks ? (DynamicInvokeThunkGenerationPolicy)new NoDynamicInvokeThunkGenerationPolicy() : new PrecomputedDynamicInvokeThunkGenerationPolicy())
+            StackTraceEmissionPolicy stackTraceEmissionPolicy)
+            : base(typeSystemContext, new AttributeSpecifiedBlockingPolicy())
         {
-            // Need to do this dance because C# won't let us access `this` in the `base()` expression above. Sigh.
-            (_dynamicInvokeThunkGenerationPolicy as PrecomputedDynamicInvokeThunkGenerationPolicy)?.SetParentWorkaround(this);
-
             _compilationModuleGroup = group;
             _metadataDescribingModule = metadataDescribingModule;
             _compilationModules = new HashSet<ModuleDesc>(compilationModules);
@@ -407,7 +400,7 @@ namespace ILCompiler
                 MethodIL weakMethodIL = ilProvider.GetMethodIL(weakMetadataMethod);
                 Dictionary<MethodDesc, int> weakMethodMappings = new Dictionary<MethodDesc, int>();
                 Dictionary<FieldDesc, int> weakFieldMappings = new Dictionary<FieldDesc, int>();
-                ReadMetadataMethod(weakMethodIL, result.WeakReflectedTypeMappings, weakMethodMappings, weakFieldMappings, metadataModules);
+                ReadMetadataMethod(weakMethodIL, result.AllTypeMappings, weakMethodMappings, weakFieldMappings, metadataModules);
                 if ((weakMethodMappings.Count > 0) || (weakFieldMappings.Count > 0))
                 {
                     // the format does not permit weak field/method mappings
@@ -545,7 +538,7 @@ namespace ILCompiler
                     }
                 }
 
-                if (metadataType.ThreadGcStaticFieldSize.AsInt > 0)
+                if (metadataType.ThreadStaticFieldSize.AsInt > 0)
                 {
                     dependencies.Add(((UtcNodeFactory)factory).TypeThreadStaticsOffsetSymbol(metadataType), "Thread statics for ReflectionFieldMap entry");
                 }
@@ -713,7 +706,7 @@ namespace ILCompiler
                     continue;
 
                 int token;
-                if (loadedMetadata.AllTypeMappings.TryGetValue(definition, out token) || loadedMetadata.WeakReflectedTypeMappings.TryGetValue(definition, out token))
+                if (loadedMetadata.AllTypeMappings.TryGetValue(definition, out token))
                 {
                     typeMappings.Add(new MetadataMapping<MetadataType>(definition, token));
                 }
@@ -744,14 +737,6 @@ namespace ILCompiler
 
                 foreach (FieldDesc field in eetypeGenerated.GetFields())
                     AddFieldMapping(field, canonicalFieldsAddedToMap, fieldMappings);
-            }
-
-            foreach (var typeMapping in loadedMetadata.WeakReflectedTypeMappings)
-            {
-                // Imported types that are also declared as weak reflected types need to be added to the TypeMap table, but only if they are also
-                // reachable from static compilation (node marked in the dependency analysis graph)
-                if (factory.CompilationModuleGroup.ShouldReferenceThroughImportTable(typeMapping.Key) && factory.NecessaryTypeSymbol(typeMapping.Key).Marked)
-                    typeMappings.Add(new MetadataMapping<MetadataType>(typeMapping.Key, typeMapping.Value));
             }
 
             stackTraceMapping = GenerateStackTraceMetadata(factory);
@@ -909,6 +894,38 @@ namespace ILCompiler
         }
 
         /// <summary>
+        /// Is there a reflection invoke stub for a method that is invokable?
+        /// </summary>
+        public override bool HasReflectionInvokeStubForInvokableMethod(MethodDesc method)
+        {
+            Debug.Assert(IsReflectionInvokable(method));
+
+            if (!ProjectNDependencyBehavior.EnableFullAnalysis)
+            {
+                if (method.IsCanonicalMethod(CanonicalFormKind.Any))
+                    return false;
+            }
+            else
+            {
+                if (method.IsCanonicalMethod(CanonicalFormKind.Universal))
+                    return false;
+            }
+
+            MethodDesc reflectionInvokeStub = GetCanonicalReflectionInvokeStub(method);
+
+            if (reflectionInvokeStub == null)
+                return false;
+
+            // TODO: Generate DynamicInvokeTemplateMap dependencies correctly. For now, force all canonical stubs to go through the 
+            // calling convention converter interpreter path.
+            if (reflectionInvokeStub.IsSharedByGenericInstantiations)
+                return false;
+
+            return true;
+        }
+
+
+        /// <summary>
         /// Gets a stub that can be used to reflection-invoke a method with a given signature.
         /// </summary>
         public override MethodDesc GetCanonicalReflectionInvokeStub(MethodDesc method)
@@ -1022,46 +1039,6 @@ namespace ILCompiler
             public bool IsBlocked(MetadataType typeDef) => false;
             public bool IsBlocked(MethodDesc methodDef) => false;
             public ModuleDesc GetModuleOfType(MetadataType typeDef) => typeDef.Module;
-        }
-
-        private sealed class PrecomputedDynamicInvokeThunkGenerationPolicy : DynamicInvokeThunkGenerationPolicy
-        {
-            private PrecomputedMetadataManager _parent;
-
-            public PrecomputedDynamicInvokeThunkGenerationPolicy()
-            {
-            }
-
-            public void SetParentWorkaround(PrecomputedMetadataManager parent)
-            {
-                _parent = parent;
-            }
-
-            public override bool HasStaticInvokeThunk(MethodDesc method)
-            {
-                if (!ProjectNDependencyBehavior.EnableFullAnalysis)
-                {
-                    if (method.IsCanonicalMethod(CanonicalFormKind.Any))
-                        return false;
-                }
-                else
-                {
-                    if (method.IsCanonicalMethod(CanonicalFormKind.Universal))
-                        return false;
-                }
-
-                MethodDesc reflectionInvokeStub = _parent.GetCanonicalReflectionInvokeStub(method);
-
-                if (reflectionInvokeStub == null)
-                    return false;
-
-                // TODO: Generate DynamicInvokeTemplateMap dependencies correctly. For now, force all canonical stubs to go through the 
-                // calling convention converter interpreter path.
-                if (reflectionInvokeStub.IsSharedByGenericInstantiations)
-                    return false;
-
-                return true;
-            }
         }
     }
 }

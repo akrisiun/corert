@@ -101,9 +101,9 @@ namespace ILCompiler.DependencyAnalysis
             factory.FrozenSegmentRegion.AddEmbeddedObject(this);
         }
 
-        public override int ClassCode => 1789429316;
+        protected internal override int ClassCode => 1789429316;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return _preInitFieldInfo.CompareTo(((FrozenArrayNode)other)._preInitFieldInfo, comparer);
         }

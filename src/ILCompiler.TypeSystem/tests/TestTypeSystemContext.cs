@@ -110,9 +110,6 @@ namespace TypeSystemTests
         {
             Debug.Assert(field.IsStatic);
 
-            if (field.IsThreadStatic)
-                return true;
-
             TypeDesc fieldType = field.FieldType;
             if (fieldType.IsValueType)
                 return ((DefType)fieldType).ContainsGCPointers;

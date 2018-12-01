@@ -113,7 +113,14 @@ namespace ILCompiler.DependencyAnalysis
             return dependencies;
         }
 
-        public override int ClassCode => -1145565068;
+        protected internal override int ClassCode => -1145565068;
+
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
+        {
+            return CompareToImpl((SortableDependencyNode)other, comparer);
+        }
+
+        int ISortableSymbolNode.ClassCode => this.ClassCode;
 
         void ISymbolNode.AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {

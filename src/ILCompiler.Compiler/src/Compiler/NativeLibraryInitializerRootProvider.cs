@@ -20,10 +20,10 @@ namespace ILCompiler
         /// </summary>
         public const string ManagedEntryPointMethodName = "__managed__Startup";
 
-        private ModuleDesc _module;
-        private IReadOnlyCollection<MethodDesc> _libraryInitializers;
+        private EcmaModule _module;
+        private IList<MethodDesc> _libraryInitializers;
 
-        public NativeLibraryInitializerRootProvider(ModuleDesc module, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public NativeLibraryInitializerRootProvider(EcmaModule module, IList<MethodDesc> libraryInitializers)
         {
             _module = module;
             _libraryInitializers = libraryInitializers;

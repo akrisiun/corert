@@ -35,7 +35,7 @@ namespace Internal.TypeSystem
 
             flags |= TypeFlags.HasGenericVarianceComputed;
             flags |= TypeFlags.HasFinalizerComputed;
-            flags |= TypeFlags.AttributeCacheComputed;
+            flags |= TypeFlags.IsByRefLikeComputed;
 
             return flags;
         }

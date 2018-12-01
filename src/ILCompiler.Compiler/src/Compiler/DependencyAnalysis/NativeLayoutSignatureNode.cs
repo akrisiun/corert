@@ -85,9 +85,9 @@ namespace ILCompiler.DependencyAnalysis
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => 1887049331;
+        protected internal override int ClassCode => 1887049331;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             NativeLayoutSignatureNode otherSignature = (NativeLayoutSignatureNode)other;
             if (_identity is MethodDesc)

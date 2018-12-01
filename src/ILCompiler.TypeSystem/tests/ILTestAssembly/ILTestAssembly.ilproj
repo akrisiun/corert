@@ -4,7 +4,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <AssemblyName>ILTestAssembly</AssemblyName>
-    <SkipTestRun>true</SkipTestRun>
+    <RunTestsForProject>false</RunTestsForProject>
   </PropertyGroup>
 
   <ItemGroup>

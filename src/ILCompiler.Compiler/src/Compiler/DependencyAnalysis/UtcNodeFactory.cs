@@ -59,7 +59,7 @@ namespace ILCompiler
             return null;
         }
 
-        private static MetadataManager PickMetadataManager(CompilerTypeSystemContext context, CompilationModuleGroup compilationModuleGroup, IEnumerable<ModuleDesc> inputModules, IEnumerable<ModuleDesc> inputMetadataOnlyAssemblies, string metadataFile, bool emitStackTraceMetadata, bool disableExceptionMessages, bool disableInvokeThunks)
+        private static MetadataManager PickMetadataManager(CompilerTypeSystemContext context, CompilationModuleGroup compilationModuleGroup, IEnumerable<ModuleDesc> inputModules, IEnumerable<ModuleDesc> inputMetadataOnlyAssemblies, string metadataFile)
         {
             if (metadataFile == null)
             {
@@ -67,28 +67,7 @@ namespace ILCompiler
             }
             else
             {
-                // Set Policies according to passed arguments
-                StackTraceEmissionPolicy stackTraceEmissionPolicy;
-                if (emitStackTraceMetadata)
-                {
-                    stackTraceEmissionPolicy = new UtcStackTraceEmissionPolicy();
-                }
-                else
-                {
-                    stackTraceEmissionPolicy = new NoStackTraceEmissionPolicy();
-                }
-
-                ManifestResourceBlockingPolicy resourceBlockingPolicy;
-                if (disableExceptionMessages)
-                {
-                    resourceBlockingPolicy = new FrameworkStringResourceBlockingPolicy();
-                }
-                else
-                {
-                    resourceBlockingPolicy = new NoManifestResourceBlockingPolicy();
-                }
-
-                return new PrecomputedMetadataManager(compilationModuleGroup, context, FindMetadataDescribingModuleInInputSet(inputModules), inputModules, inputMetadataOnlyAssemblies, ReadBytesFromFile(metadataFile), stackTraceEmissionPolicy , resourceBlockingPolicy, disableInvokeThunks);
+                return new PrecomputedMetadataManager(compilationModuleGroup, context, FindMetadataDescribingModuleInInputSet(inputModules), inputModules, inputMetadataOnlyAssemblies, ReadBytesFromFile(metadataFile), new UtcStackTraceEmissionPolicy());
             }
         }
 
@@ -107,14 +86,11 @@ namespace ILCompiler
             string outputFile, 
             UTCNameMangler nameMangler, 
             bool buildMRT, 
-            bool emitStackTraceMetadata,
-            bool disableExceptionMessages,
-            bool allowInvokeThunks,
             DictionaryLayoutProvider dictionaryLayoutProvider,
             ImportedNodeProvider importedNodeProvider) 
             : base(context, 
                   compilationModuleGroup, 
-                  PickMetadataManager(context, compilationModuleGroup, inputModules, inputMetadataOnlyAssemblies, metadataFile, emitStackTraceMetadata, disableExceptionMessages, allowInvokeThunks),
+                  PickMetadataManager(context, compilationModuleGroup, inputModules, inputMetadataOnlyAssemblies, metadataFile), 
                   NewEmptyInteropStubManager(context, compilationModuleGroup), 
                   nameMangler, 
                   new AttributeDrivenLazyGenericsPolicy(), 
@@ -183,7 +159,6 @@ namespace ILCompiler
             graph.AddRoot(EagerCctorTable, "EagerCctorTable is always generated");
             graph.AddRoot(DispatchMapTable, "DispatchMapTable is always generated");
             graph.AddRoot(FrozenSegmentRegion, "FrozenSegmentRegion is always generated");
-            graph.AddRoot(InterfaceDispatchCellSection, "Interface dispatch cell section is always generated");
             graph.AddRoot(TypeManagerIndirection, "ModuleManagerIndirection is always generated");
             graph.AddRoot(GCStaticsRegion, "GC StaticsRegion is always generated");
             graph.AddRoot(GCStaticDescRegion, "GC Static Desc is always generated");
@@ -237,21 +212,12 @@ namespace ILCompiler
         {
             if (method.HasCustomAttribute("System.Runtime", "RuntimeImportAttribute"))
             {
-                RuntimeImportMethodNode runtimeImportMethod = new RuntimeImportMethodNode(method);
-              
-                // If the method is imported from either the current module or the runtime, reference it directly
-                if (CompilationModuleGroup.ContainsMethodBody(method, false))
-                    return runtimeImportMethod;
-                // If the method is imported from the runtime but not a managed assembly, reference it directly
-                else if (!CompilationModuleGroup.ImportsMethod(method, false))
-                    return runtimeImportMethod;
-                
-                // If the method is imported from a managed assembly, reference it via an import cell
+                return new RuntimeImportMethodNode(method);
             }
-            else
+
+            if (CompilationModuleGroup.ContainsMethodBody(method, false))
             {
-                if (CompilationModuleGroup.ContainsMethodBody(method, false))
-                    return NonExternMethodSymbol(method, false);
+                return NonExternMethodSymbol(method, false);
             }
 
             return _importedNodeProvider.ImportedMethodCodeNode(this, method, false);
@@ -285,18 +251,16 @@ namespace ILCompiler
 
         public GCStaticDescRegionNode GCStaticDescRegion = new GCStaticDescRegionNode(
             CompilationUnitPrefix + "__GCStaticDescStart", 
-            CompilationUnitPrefix + "__GCStaticDescEnd",
-            new SortableDependencyNode.EmbeddedObjectNodeComparer(new CompilerComparer()));
+            CompilationUnitPrefix + "__GCStaticDescEnd");
 
         public GCStaticDescRegionNode ThreadStaticGCDescRegion = new GCStaticDescRegionNode(
             CompilationUnitPrefix + "__ThreadStaticGCDescStart", 
-            CompilationUnitPrefix + "__ThreadStaticGCDescEnd",
-            new SortableDependencyNode.EmbeddedObjectNodeComparer(new CompilerComparer()));
+            CompilationUnitPrefix + "__ThreadStaticGCDescEnd");
 
         public ArrayOfEmbeddedDataNode<ThreadStaticsOffsetNode> ThreadStaticsOffsetRegion = new ArrayOfEmbeddedDataNode<ThreadStaticsOffsetNode>(
             CompilationUnitPrefix + "__ThreadStaticOffsetRegionStart",
             CompilationUnitPrefix + "__ThreadStaticOffsetRegionEnd",
-            new SortableDependencyNode.EmbeddedObjectNodeComparer(new CompilerComparer()));
+            null);
 
         public ThreadStaticsIndexNode ThreadStaticsIndex;
 
@@ -382,6 +346,14 @@ namespace ILCompiler
             // Use the typical field definition in case this is an instantiated generic type
             field = field.GetTypicalFieldDefinition();
             return ReadOnlyDataBlob(NameMangler.GetMangledFieldName(field), ((EcmaField)field).GetFieldRvaData(), Target.PointerSize);
+        }
+
+        public class UtcDictionaryLayoutProvider : DictionaryLayoutProvider
+        {
+            public override DictionaryLayoutNode GetLayout(TypeSystemEntity methodOrType)
+            {
+                return new UtcDictionaryLayoutNode(methodOrType);
+            }
         }
 
         public ISymbolNode LoopHijackFlagSymbol()

@@ -4314,7 +4314,7 @@ namespace Internal.Metadata.NativeFormat
         } // Name
 
         internal ConstantStringValueHandle _name;
-        /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
+        /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public HandleCollection Constraints
         {

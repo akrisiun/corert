@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
 using System.Diagnostics;
 
 using Internal.Runtime;
@@ -11,14 +10,10 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public class InterfaceDispatchCellNode : EmbeddedObjectNode, ISymbolDefinitionNode
+    public class InterfaceDispatchCellNode : ObjectNode, ISymbolDefinitionNode
     {
         private readonly MethodDesc _targetMethod;
         private readonly string _callSiteIdentifier;
-
-        internal MethodDesc TargetMethod => _targetMethod;
-
-        internal string CallSiteIdentifier => _callSiteIdentifier;
 
         public InterfaceDispatchCellNode(MethodDesc targetMethod, string callSiteIdentifier)
         {
@@ -32,10 +27,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(GetMangledName(nameMangler, _targetMethod, _callSiteIdentifier));
         }
-
-        int ISymbolDefinitionNode.Offset => OffsetFromBeginningOfArray;
-
-        int ISymbolNode.Offset => 0;
+        public int Offset => 0;
 
         public override bool IsShareable => false;
 
@@ -53,9 +45,11 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
 
+        public override ObjectNodeSection Section => ObjectNodeSection.DataSection;
+
         public override bool StaticDependenciesAreComputed => true;
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
+        protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
             DependencyList result = new DependencyList();
 
@@ -65,25 +59,18 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref result, factory, _targetMethod);
-
-            TargetArchitecture targetArchitecture = factory.Target.Architecture;
-            if (targetArchitecture == TargetArchitecture.ARM ||
-                targetArchitecture == TargetArchitecture.ARMEL)
-            {
-                result.Add(factory.InitialInterfaceDispatchStub, "Initial interface dispatch stub");
-            }
-            else
-            {
-                result.Add(factory.ExternSymbol("RhpInitialDynamicInterfaceDispatch"), "Initial interface dispatch stub");
-            }
-
-            result.Add(factory.NecessaryTypeSymbol(_targetMethod.OwningType), "Interface type");
-
+            
             return result;
         }
 
-        public override void EncodeData(ref ObjectDataBuilder objData, NodeFactory factory, bool relocsOnly)
+        public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
+            ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
+            // The interface dispatch cell has an alignment requirement of 2 * [Pointer size] as part of the 
+            // synchronization mechanism of the two values in the runtime.
+            objData.RequireInitialAlignment(_targetMethod.Context.Target.PointerSize * 2);
+            objData.AddSymbol(this);
+
             TargetArchitecture targetArchitecture = factory.Target.Architecture;
             if (targetArchitecture == TargetArchitecture.ARM ||
                 targetArchitecture == TargetArchitecture.ARMEL)
@@ -114,16 +101,22 @@ namespace ILCompiler.DependencyAnalysis
                 // 32 bits on targets whose pointer size is 64 bit. 
                 objData.EmitInt(0);
             }
+
+            // End the run of dispatch cells
+            objData.EmitZeroPointer();
+
+            // Avoid consulting VTable slots until they're guaranteed complete during final data emission
+            if (!relocsOnly)
+            {
+                objData.EmitNaturalInt(VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, _targetMethod));
+            }
+
+            return objData.ToObjectData();
         }
 
-        protected override void OnMarked(NodeFactory factory)
-        {
-            factory.InterfaceDispatchCellSection.AddEmbeddedObject(this);
-        }
+        protected internal override int ClassCode => -2023802120;
 
-        public override int ClassCode => -2023802120;
-
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             var compare = comparer.Compare(_targetMethod, ((InterfaceDispatchCellNode)other)._targetMethod);
             return compare != 0 ? compare : string.Compare(_callSiteIdentifier, ((InterfaceDispatchCellNode)other)._callSiteIdentifier);

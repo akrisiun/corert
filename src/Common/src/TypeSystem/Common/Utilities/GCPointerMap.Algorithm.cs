@@ -52,7 +52,6 @@ namespace Internal.TypeSystem
                 }
             }
 
-            Debug.Assert(builder.ToGCMap().Size * type.Context.Target.PointerSize >= type.GCStaticFieldSize.AsInt);
             return builder.ToGCMap();
         }
 
@@ -61,11 +60,11 @@ namespace Internal.TypeSystem
         /// </summary>
         public static GCPointerMap FromThreadStaticLayout(DefType type)
         {
-            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.ThreadGcStaticFieldSize.AsInt, type.Context.Target.PointerSize);
+            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.ThreadStaticFieldSize.AsInt, type.Context.Target.PointerSize);
 
             foreach (FieldDesc field in type.GetFields())
             {
-                if (!field.IsStatic || field.HasRva || field.IsLiteral || !field.IsThreadStatic || !field.HasGCStaticBase)
+                if (!field.IsStatic || field.HasRva || field.IsLiteral || !field.IsThreadStatic)
                     continue;
 
                 TypeDesc fieldType = field.FieldType;
@@ -85,7 +84,6 @@ namespace Internal.TypeSystem
                 }
             }
 
-            Debug.Assert(builder.ToGCMap().Size * type.Context.Target.PointerSize >= type.ThreadGcStaticFieldSize.AsInt);
             return builder.ToGCMap();
         }
 

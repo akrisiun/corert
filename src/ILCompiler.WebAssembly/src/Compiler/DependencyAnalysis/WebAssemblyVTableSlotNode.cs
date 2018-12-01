@@ -61,24 +61,15 @@ namespace ILCompiler.DependencyAnalysis
 
             if (!relocsOnly)
             {
-                int tableOffset;
-                if (_targetMethod.OwningType.IsInterface)
-                {
-                    tableOffset = 0;
-                }
-                else
-                {
-                    tableOffset = EETypeNode.GetVTableOffset(factory.Target.PointerSize) / factory.Target.PointerSize;
-                }
-
-                objData.EmitInt(tableOffset + VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, _targetMethod, _targetMethod.OwningType));
+                var tableOffset = EETypeNode.GetVTableOffset(factory.Target.PointerSize) / factory.Target.PointerSize;
+                objData.EmitInt(tableOffset + VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, _targetMethod));
             }
             return objData.ToObjectData();
         }
 
-        public override int ClassCode => 0;
+        protected override int ClassCode => 0;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return comparer.Compare(_targetMethod, ((WebAssemblyVTableSlotNode)other)._targetMethod);
         }

@@ -12,9 +12,5 @@
       "StableVersions": [],
       "BaselineVersion": "1.0.0",
     },
-    "Microsoft.DotNet.ObjectWriter" : {
-      "StableVersions": [],
-      "BaselineVersion": "1.0.0",
-    },
   }
 }

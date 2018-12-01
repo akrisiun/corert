@@ -17,9 +17,9 @@ namespace Internal.IL.Stubs.StartupCode
     {
         private TypeDesc _owningType;
         private MethodSignature _signature;
-        private IReadOnlyCollection<MethodDesc> _libraryInitializers;
+        private IList<MethodDesc> _libraryInitializers;
 
-        public NativeLibraryStartupMethod(TypeDesc owningType, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public NativeLibraryStartupMethod(TypeDesc owningType, IList<MethodDesc> libraryInitializers)
         {
             _owningType = owningType;
             _libraryInitializers = libraryInitializers;

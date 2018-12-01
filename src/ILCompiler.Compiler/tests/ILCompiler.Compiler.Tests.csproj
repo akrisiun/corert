@@ -4,14 +4,11 @@
     <OutputType>Library</OutputType>
     <AssemblyName>ILCompiler.Compiler.Tests</AssemblyName>
     <RootNamespace>ILCompiler.Compiler.Tests</RootNamespace>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="xunit">
-      <Version>$(XUnitPackageVersion)</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions">
-      <Version>$(MicrosoftDotNetXUnitExtensionsVersion)</Version>
+    <PackageReference Include="Microsoft.DotNet.BuildTools.TestSuite">
+      <Version>$(XunitNetcoreExtensionsVersion)</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

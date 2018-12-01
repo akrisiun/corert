@@ -22,9 +22,9 @@ namespace ILCompiler
         public const string ManagedEntryPointMethodName = "__managed__Main";
 
         private EcmaModule _module;
-        private IReadOnlyCollection<MethodDesc> _libraryInitializers;
+        private IList<MethodDesc> _libraryInitializers;
 
-        public MainMethodRootProvider(EcmaModule module, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public MainMethodRootProvider(EcmaModule module, IList<MethodDesc> libraryInitializers)
         {
             _module = module;
             _libraryInitializers = libraryInitializers;

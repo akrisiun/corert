@@ -1003,9 +1003,8 @@ namespace Internal.IL
                     if (IsTypeName(method, "System", "ByReference`1"))
                     {
                         var thisRef = _stack.Pop();
-                        PushExpression(StackValueKind.ByRef,
-                            String.Concat("(", GetSignatureTypeNameAndAddReference(method.Signature.ReturnType), ")", ((ExpressionEntry)thisRef).Name, "->_value"),
-                            method.Signature.ReturnType);
+
+                        PushExpression(StackValueKind.ValueType, ((ExpressionEntry)thisRef).Name + "->_value", method.Signature.ReturnType);
                         return true;
                     }
                     break;
@@ -1152,7 +1151,7 @@ namespace Internal.IL
             {
                 // TODO: Null checks
 
-                if (method.IsVirtual && !method.IsFinal && !method.OwningType.IsSealed())
+                if (method.IsVirtual)
                 {
                     // TODO: Full resolution of virtual methods
                     if (!method.IsNewSlot)
@@ -2614,8 +2613,7 @@ namespace Internal.IL
 
         private void ImportUnalignedPrefix(byte alignment)
         {
-            // TODO:
-            // throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ImportVolatilePrefix()

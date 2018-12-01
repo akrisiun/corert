@@ -86,9 +86,9 @@ namespace ILCompiler.DependencyAnalysis
             return this.GetMangledName(factory.NameMangler);
         }
 
-        public override int ClassCode => ClassCode;
+        int ISortableSymbolNode.ClassCode => ClassCode;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        int ISortableSymbolNode.CompareToImpl(ISortableSymbolNode other, CompilerComparer comparer)
         {
             return CompareToImpl((ObjectNode)other, comparer);
         }
@@ -134,11 +134,11 @@ namespace ILCompiler.DependencyAnalysis
                 foreach (var arg in _owningType.Instantiation)
                 {
                     // Skip types that do not have a default constructor (not interesting).
-                    if (arg.IsValueType || arg.GetDefaultConstructor() == null || !ConstructedEETypeNode.CreationAllowed(arg))
+                    if (arg.IsValueType || arg.GetDefaultConstructor() == null)
                         continue;
 
                     result.Add(new DependencyListEntry(
-                        factory.ConstructedTypeSymbol(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
+                        factory.DefaultConstructorFromLazy(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
                         "Default constructor for lazy generics"));
                 }
             }
@@ -176,9 +176,9 @@ namespace ILCompiler.DependencyAnalysis
             _owningType = owningType;
         }
 
-        public override int ClassCode => 889700584;
+        protected internal override int ClassCode => 889700584;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return comparer.Compare(_owningType, ((TypeGenericDictionaryNode)other)._owningType);
         }
@@ -218,21 +218,21 @@ namespace ILCompiler.DependencyAnalysis
                 foreach (var arg in _owningMethod.OwningType.Instantiation)
                 {
                     // Skip types that do not have a default constructor (not interesting).
-                    if (arg.IsValueType || arg.GetDefaultConstructor() == null || !ConstructedEETypeNode.CreationAllowed(arg))
+                    if (arg.IsValueType || arg.GetDefaultConstructor() == null)
                         continue;
 
                     dependencies.Add(new DependencyListEntry(
-                        factory.ConstructedTypeSymbol(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
+                        factory.DefaultConstructorFromLazy(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
                         "Default constructor for lazy generics"));
                 }
                 foreach (var arg in _owningMethod.Instantiation)
                 {
                     // Skip types that do not have a default constructor (not interesting).
-                    if (arg.IsValueType || arg.GetDefaultConstructor() == null || !ConstructedEETypeNode.CreationAllowed(arg))
+                    if (arg.IsValueType || arg.GetDefaultConstructor() == null)
                         continue;
 
                     dependencies.Add(new DependencyListEntry(
-                        factory.ConstructedTypeSymbol(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
+                        factory.DefaultConstructorFromLazy(arg.ConvertToCanonForm(CanonicalFormKind.Specific)),
                         "Default constructor for lazy generics"));
                 }
             }
@@ -277,9 +277,9 @@ namespace ILCompiler.DependencyAnalysis
             _owningMethod = owningMethod;
         }
 
-        public override int ClassCode => -1245704203;
+        protected internal override int ClassCode => -1245704203;
 
-        public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
+        protected internal override int CompareToImpl(SortableDependencyNode other, CompilerComparer comparer)
         {
             return comparer.Compare(_owningMethod, ((MethodGenericDictionaryNode)other)._owningMethod);
         }

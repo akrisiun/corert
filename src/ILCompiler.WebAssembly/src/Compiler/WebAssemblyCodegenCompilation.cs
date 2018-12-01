@@ -9,7 +9,6 @@ using Internal.TypeSystem;
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
 using LLVMSharp;
-using ILCompiler.WebAssembly;
 
 namespace ILCompiler
 {
@@ -18,23 +17,18 @@ namespace ILCompiler
         internal WebAssemblyCodegenConfigProvider Options { get; }
         internal LLVMModuleRef Module { get; }
         public new WebAssemblyCodegenNodeFactory NodeFactory { get; }
-        internal LLVMDIBuilderRef DIBuilder { get; }
-        internal Dictionary<string, DebugMetadata> DebugMetadataMap { get; }
         internal WebAssemblyCodegenCompilation(
             DependencyAnalyzerBase<NodeFactory> dependencyGraph,
             WebAssemblyCodegenNodeFactory nodeFactory,
             IEnumerable<ICompilationRootProvider> roots,
-            DebugInformationProvider debugInformationProvider,
             Logger logger,
             WebAssemblyCodegenConfigProvider options)
-            : base(dependencyGraph, nodeFactory, GetCompilationRoots(roots, nodeFactory), debugInformationProvider, null, logger)
+            : base(dependencyGraph, nodeFactory, GetCompilationRoots(roots, nodeFactory), null, null, logger)
         {
             NodeFactory = nodeFactory;
             Module = LLVM.ModuleCreateWithName("netscripten");
             LLVM.SetTarget(Module, "asmjs-unknown-emscripten");
             Options = options;
-            DIBuilder = LLVMPInvokes.LLVMCreateDIBuilder(Module);
-            DebugMetadataMap = new Dictionary<string, DebugMetadata>();
         }
 
         private static IEnumerable<ICompilationRootProvider> GetCompilationRoots(IEnumerable<ICompilationRootProvider> existingRoots, NodeFactory factory)

@@ -31,11 +31,14 @@ namespace ILCompiler
         {
             if (type.IsArray)
             {
-                if (type.IsArrayTypeWithoutGenericInterfaces())
-                    return type.Context.GetWellKnownType(WellKnownType.Array);
-
-                MetadataType arrayShadowType = type.Context.SystemModule.GetKnownType("System", "Array`1");
-                return arrayShadowType.MakeInstantiatedType(((ArrayType)type).ElementType);
+                var arrayType = (ArrayType)type;
+                TypeDesc elementType = arrayType.ElementType;
+                if (arrayType.IsSzArray && !elementType.IsPointer && !elementType.IsFunctionPointer)
+                {
+                    MetadataType arrayShadowType = type.Context.SystemModule.GetKnownType("System", "Array`1");
+                    return arrayShadowType.MakeInstantiatedType(elementType);
+                }
+                return type.Context.GetWellKnownType(WellKnownType.Array);
             }
 
             Debug.Assert(type is DefType);
@@ -179,20 +182,6 @@ namespace ILCompiler
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Determines whether an array type does implements the generic collection interfaces. This is the case
-        /// for multi-dimensional arrays, and arrays of pointers.
-        /// </summary>
-        public static bool IsArrayTypeWithoutGenericInterfaces(this TypeDesc type)
-        {
-            if (!type.IsArray)
-                return false;
-
-            var arrayType = (ArrayType)type;
-            TypeDesc elementType = arrayType.ElementType;
-            return type.IsMdArray || elementType.IsPointer || elementType.IsFunctionPointer;
         }
     }
 }

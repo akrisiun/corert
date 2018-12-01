@@ -13,7 +13,7 @@ namespace ILVerify
         /// <summary>
         /// This method should return the same instance when queried multiple times.
         /// </summary>
-        PEReader Resolve(string simpleName);
+        PEReader Resolve(AssemblyName name);
     }
 
     /// <summary>
@@ -23,14 +23,16 @@ namespace ILVerify
     {
         private readonly Dictionary<string, PEReader> _resolverCache = new Dictionary<string, PEReader>();
 
-        public PEReader Resolve(string simpleName)
+        public PEReader Resolve(AssemblyName name)
         {
+            // Note: we use simple names instead of full names to resolve, because we can't get a full name from an assembly without reading it
+            string simpleName = name.Name;
             if (_resolverCache.TryGetValue(simpleName, out PEReader peReader))
             {
                 return peReader;
             }
 
-            PEReader result = ResolveCore(simpleName);
+            PEReader result = ResolveCore(name);
             if (result != null)
             {
                 _resolverCache.Add(simpleName, result);
@@ -40,6 +42,6 @@ namespace ILVerify
             return null;
         }
 
-        protected abstract PEReader ResolveCore(string simpleName);
+        protected abstract PEReader ResolveCore(AssemblyName name);
     }
 }

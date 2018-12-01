@@ -5,7 +5,7 @@
     <AssemblyName>PrimaryMetadataAssembly</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsCoreAssembly>true</IsCoreAssembly>
-    <SkipTestRun>true</SkipTestRun>
+    <RunTestsForProject>false</RunTestsForProject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Platform.cs" />

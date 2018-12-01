@@ -128,6 +128,6 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        public override int ClassCode => -534800244;
+        protected internal override int ClassCode => -534800244;
     }
 }

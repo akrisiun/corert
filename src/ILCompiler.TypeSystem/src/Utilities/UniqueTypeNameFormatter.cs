@@ -120,7 +120,7 @@ namespace Internal.TypeSystem
 
         protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
         {
-            AppendName(sb, containingType);
+            AppendNameForNamespaceType(sb, containingType);
 
             sb.Append('+');
 

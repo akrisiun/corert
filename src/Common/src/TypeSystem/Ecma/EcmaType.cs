@@ -242,28 +242,12 @@ namespace Internal.TypeSystem.Ecma
                     flags |= TypeFlags.HasFinalizer;
             }
 
-            if ((mask & TypeFlags.AttributeCacheComputed) != 0)
+            if ((mask & TypeFlags.IsByRefLikeComputed) != 0)
             {
-                MetadataReader reader = MetadataReader;
-                MetadataStringComparer stringComparer = reader.StringComparer;
-                bool isValueType = IsValueType;
+                flags |= TypeFlags.IsByRefLikeComputed;
 
-                flags |= TypeFlags.AttributeCacheComputed;
-
-                foreach (CustomAttributeHandle attributeHandle in _typeDefinition.GetCustomAttributes())
-                {
-                    if (MetadataReader.GetAttributeNamespaceAndName(attributeHandle, out StringHandle namespaceHandle, out StringHandle nameHandle))
-                    {
-                        if (isValueType &&
-                            stringComparer.Equals(nameHandle, "IsByRefLikeAttribute") &&
-                            stringComparer.Equals(namespaceHandle, "System.Runtime.CompilerServices"))
-                            flags |= TypeFlags.IsByRefLike;
-
-                        if (stringComparer.Equals(nameHandle, "IntrinsicAttribute") &&
-                            stringComparer.Equals(namespaceHandle, "System.Runtime.CompilerServices"))
-                            flags |= TypeFlags.IsIntrinsic;
-                    }
-                }
+                if (IsValueType && HasCustomAttribute("System.Runtime.CompilerServices", "IsByRefLikeAttribute"))
+                    flags |= TypeFlags.IsByRefLike;
             }
 
             return flags;

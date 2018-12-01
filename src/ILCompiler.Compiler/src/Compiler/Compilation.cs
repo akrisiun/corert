@@ -58,7 +58,7 @@ namespace ILCompiler
             foreach (var rootProvider in compilationRoots)
                 rootProvider.AddCompilationRoots(rootingService);
 
-            MetadataType globalModuleGeneratedType = nodeFactory.TypeSystemContext.GeneratedAssembly.GetGlobalModuleType();
+            MetadataType globalModuleGeneratedType = nodeFactory.CompilationModuleGroup.GeneratedAssembly.GetGlobalModuleType();
             _typeGetTypeMethodThunks = new TypeGetTypeMethodThunkCache(globalModuleGeneratedType);
             _assemblyGetExecutingAssemblyMethodThunks = new AssemblyGetExecutingAssemblyMethodThunkCache(globalModuleGeneratedType);
             _methodBaseGetCurrentMethodThunks = new MethodBaseGetCurrentMethodThunkCache();
@@ -90,12 +90,6 @@ namespace ILCompiler
 
         public DelegateCreationInfo GetDelegateCtor(TypeDesc delegateType, MethodDesc target, bool followVirtualDispatch)
         {
-            // If we're creating a delegate to a virtual method that cannot be overriden, devirtualize.
-            // This is not just an optimization - it's required for correctness in the presence of sealed
-            // vtable slots.
-            if (followVirtualDispatch && (target.IsFinal || target.OwningType.IsSealed()))
-                followVirtualDispatch = false;
-
             return DelegateCreationInfo.Create(delegateType, target, NodeFactory, followVirtualDispatch);
         }
 
@@ -108,7 +102,7 @@ namespace ILCompiler
             {
                 var pInvokeFixup = (PInvokeLazyFixupField)field;
                 PInvokeMetadata metadata = pInvokeFixup.PInvokeMetadata;
-                return NodeFactory.PInvokeMethodFixup(metadata.Module, metadata.Name, metadata.Flags);
+                return NodeFactory.PInvokeMethodFixup(metadata.Module, metadata.Name);
             }
             else
             {
@@ -366,7 +360,7 @@ namespace ILCompiler
                 Debug.Assert(!type.IsGenericDefinition);
 
                 MetadataType metadataType = type as MetadataType;
-                if (metadataType != null && metadataType.ThreadGcStaticFieldSize.AsInt > 0)
+                if (metadataType != null && metadataType.ThreadStaticFieldSize.AsInt > 0)
                 {
                     _graph.AddRoot(_factory.TypeThreadStaticIndex(metadataType), reason);
 
@@ -419,16 +413,7 @@ namespace ILCompiler
 
             public void RootModuleMetadata(ModuleDesc module, string reason)
             {
-                // RootModuleMetadata is kind of a hack - this is pretty much only used to force include
-                // type forwarders from assemblies metadata generator would normally not look at.
-                // This will go away when the temporary RD.XML parser goes away.
-                if (_factory.MetadataManager is UsageBasedMetadataManager)
-                    _graph.AddRoot(_factory.ModuleMetadata(module), reason);
-            }
-
-            public void RootReadOnlyDataBlob(byte[] data, int alignment, string reason, string exportName)
-            {
-                _graph.AddRoot(_factory.ReadOnlyDataBlob(exportName, data, alignment), reason);
+                _graph.AddRoot(_factory.ModuleMetadata(module), reason);
             }
         }
     }
