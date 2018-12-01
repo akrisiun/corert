@@ -1,16 +1,18 @@
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <AssemblyName>ILCompiler.Compiler.Tests.Assets</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SkipTestRun>true</SkipTestRun>
+    <ProjectGuid>{94D3F829-6ACA-4399-B6CF-EE0486E1E36A}</ProjectGuid>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Test.CoreLib\src\Test.CoreLib.csproj" />
+    <ProjectReference Include="..\..\..\Test.CoreLib\src\Test.CoreLib.csproj">
+      <Project>{22C898F5-CE3A-4BE4-87B0-1E2F29ECB5D6}</Project>
+      <Name>Test.CoreLib</Name>
+    </ProjectReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="DependencyGraph.cs" />
     <Compile Include="Devirtualization.cs" />

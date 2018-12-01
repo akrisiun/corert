@@ -1,12 +1,116 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <!--<OutputType>Library</OutputType>-->
+    <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
+    <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
+    <!--<TargetFrameworkIdentifier>_</TargetFrameworkIdentifier>-->
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+    <RidSpecificAssets>true</RidSpecificAssets>
+    
+    <_UnsupportedTargetFrameworkError>false</_UnsupportedTargetFrameworkError>
+    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+    <RidSpecificAssets>true</RidSpecificAssets>
+
+    <IsDotNetFrameworkProductAssembly>true</IsDotNetFrameworkProductAssembly>
+    <IsCoreAssembly>true</IsCoreAssembly>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsProjectNLibrary>false</IsProjectNLibrary>
+
+    <NoWarn>;NU1701;49;3;17;34;IDE1006;1006;CS0436;CA1016;</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Open.snk</AssemblyOriginatorKeyFile>
+    <DefineConstants>TRACE;DEBUG;AMD64;BIT64;PLATFORM_WINDOWS;CORERT;INPLACE_RUNTIME;</DefineConstants>
+    <ApplicationIcon />
+    <StartupObject />
+    <AotPackageReferencePath>e:\Beta\dot64\corert\bin</AotPackageReferencePath>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>E:\Beta\dot64\corert\bin</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ILCompiler.Compiler\src\ILCompiler.Compiler.csproj" />
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(IsProjectNLibrary)' != 'true'">
+    <!--
+    <ProjectReference Include="..\..\AotPackageReference\AotPackageReference.depproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+    -->
+    <ProjectReference Include="..\..\System.Private.CoreLib\src\System.Private.CoreLib.csproj" />
+    <ProjectReference Include="..\..\System.Private.StackTraceGenerator\src\System.Private.StackTraceGenerator.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\System.Private.DeveloperExperience.Console\src\System.Private.DeveloperExperience.Console.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="System.Collections">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Console">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.IO.dll</HintPath>
+    </Reference>
+    <!--<Reference Include="System.Private.CoreLib">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Private.CoreLib.dll</HintPath>
+    </Reference>-->
+    <!--<Reference Include="System.Private.DeveloperExperience.Console">
+      <HintPath>..\..\bin\System.Private.DeveloperExperience.Console.dll</HintPath>
+    </Reference>-->
+    <Reference Include="System.Private.Reflection.Metadata.Ecma335">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Private.Reflection.Metadata.Ecma335.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Private.Threading">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Private.Threading.dll</HintPath>
+    </Reference>
+    <!--<Reference Include="System.Runtime.Extensions">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <Private>true</Private>
+      <HintPath>..\..\bin\System.Runtime.dll</HintPath>
+    </Reference>-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ReferencePath Include="$(AotPackageReferencePath)\System.Runtime.dll" />
+    <ReferencePath Include="$(AotPackageReferencePath)\System.Runtime.Extensions.dll" />
+    <ReferencePath Include="$(AotPackageReferencePath)\System.Collections.dll" />
+    <ReferencePath Include="$(AotPackageReferencePath)\System.Console.dll" />
+    <ReferencePath Include="$(AotPackageReferencePath)\System.IO.dll" />
   </ItemGroup>
 
 </Project>
