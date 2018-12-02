@@ -15,8 +15,6 @@ namespace HelloWorld
             string str = "Hello World! #3";
             Console.WriteLine(str);
             object obj = str;
-
-            Debugger.Break();
             
             // Microsoft.NETCore.App\2.1.6
             Console.WriteLine("BaseDirectory");
@@ -31,6 +29,8 @@ namespace HelloWorld
             Console.WriteLine(str2);
             // error CS0012: The type 'Object' is defined in an assembly that is not referenced. 
             // You must add a reference to assembly 'System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+
+            Console.ReadKey();
             return 0;
         }
     }

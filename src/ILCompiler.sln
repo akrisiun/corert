@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		dirs.proj = dirs.proj
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtime.Base", "Runtime.Base\src\Runtime.Base.csproj", "{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		System.Private.CoreLib\shared\System.Private.CoreLib.Shared.projitems*{be95c560-b508-4588-8907-f9fc5bc1a0cf}*SharedItemsImports = 4
@@ -563,6 +565,33 @@ Global
 		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x64.Build.0 = Release|Any CPU
 		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3BEDE34-5215-41C1-A5DB-4D80AC86FBBC}.Release|x86.Build.0 = Release|Any CPU
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|arm.ActiveCfg = Debug|arm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|arm.Build.0 = Debug|arm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|arm64.ActiveCfg = Debug|arm64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|arm64.Build.0 = Debug|arm64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|armel.ActiveCfg = Debug|armel
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|armel.Build.0 = Debug|armel
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|wasm.ActiveCfg = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|wasm.Build.0 = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|x64.ActiveCfg = Debug|x64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|x64.Build.0 = Debug|x64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|x86.ActiveCfg = Debug|x86
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Debug|x86.Build.0 = Debug|x86
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|Any CPU.ActiveCfg = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|Any CPU.Build.0 = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|arm.ActiveCfg = Debug|arm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|arm.Build.0 = Debug|arm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|arm64.ActiveCfg = Debug|arm64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|arm64.Build.0 = Debug|arm64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|armel.ActiveCfg = Debug|armel
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|armel.Build.0 = Debug|armel
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|wasm.ActiveCfg = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|wasm.Build.0 = Debug|wasm
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|x64.ActiveCfg = Debug|x64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|x64.Build.0 = Debug|x64
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|x86.ActiveCfg = Debug|x86
+		{43C34EB2-08A5-45D0-93E3-9C50D975ED8B}.Release|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
