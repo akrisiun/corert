@@ -9,7 +9,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Private;
+// using System.Diagnostics.Private;
 using System.Runtime.InteropServices;
 
 namespace System.Threading
@@ -610,7 +610,7 @@ namespace System.Threading
             Action<object> callback, object stateForCallback, SynchronizationContext targetSyncContext, ExecutionContext executionContext)
         {
             // the CancellationToken has already checked that the token is cancelable before calling this method.
-            Debug.Assert(CanBeCanceled, "Cannot register for uncancelable token src");
+            System.Diagnostics.Debug.Assert(CanBeCanceled, "Cannot register for uncancelable token src");
 
             // if not canceled, register the event handlers
             // if canceled already, run the callback synchronously
@@ -711,7 +711,7 @@ namespace System.Threading
                 // - After transition, no more delegates will be added to the 
                 // - list of handlers, and hence it can be consumed and cleared at leisure by ExecuteCallbackHandlers.
                 ExecuteCallbackHandlers(throwOnFirstException);
-                Debug.Assert(IsCancellationCompleted, "Expected cancellation to have finished");
+                System.Diagnostics.Debug.Assert(IsCancellationCompleted, "Expected cancellation to have finished");
             }
         }
 

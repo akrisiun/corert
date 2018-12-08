@@ -5,6 +5,8 @@
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <ProjectGuid>{BE95C560-B508-4588-8907-F9FC5BC1A0CF}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <RuntimeIdentifiers Condition="'$(OS)' == 'Windows_NT'">win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="'$(OS)' != 'Windows_NT'">win-x64;osx.10-11-x64;ubuntu.16.04-x64</RuntimeIdentifiers>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsCoreAssembly>true</IsCoreAssembly>
     <!-- CoreLib has to be marked as CLSCompliant to allow building CLSCompliant assemblies against it -->
@@ -14,7 +16,9 @@
     <IsDotNetFrameworkProductAssembly>true</IsDotNetFrameworkProductAssembly>
   </PropertyGroup>
   <!-- Default configurations to help VS understand the options -->
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64' Or '$(OS)' == 'Windows_NT'">
+    <DefineConstants>MONO;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup>
     <ExcludeMscorlibFacade>true</ExcludeMscorlibFacade>
     <ExcludeAssemblyInfoPartialFile>true</ExcludeAssemblyInfoPartialFile>
@@ -37,6 +41,16 @@
     <FeaturePortableThreadPool Condition="'$(TargetsUnix)' == 'true'">true</FeaturePortableThreadPool>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\corefx\src\Common\src\System\Collections\Concurrent\ConcurrentQueue_Segment.cs">
+      <Link>System\Collections\Concurrent\ConcurrentQueue_Segment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\corefx\src\System.Collections.Concurrent\src\System\Collections\Concurrent\ConcurrentQueue.cs">
+      <Link>System\Collections\Concurrent\ConcurrentQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\corefx\src\System.Collections.Concurrent\src\System\Collections\Concurrent\IProducerConsumerCollection.cs">
+      <Link>System\Collections\Concurrent\IProducerConsumerCollection.cs</Link>
+    </Compile>
+    
     <Compile Include="..\..\Common\src\Internal\Runtime\RuntimeConstants.cs">
       <Link>Internal\Runtime\RuntimeConstants.cs</Link>
     </Compile>
@@ -756,7 +770,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
+    <!--
     <Compile Condition="'$(Platform)'!='wasm'" Include="$(BaseIntermediateOutputPath)\Native\$(BinDirOSGroup).$(BinDirPlatform).$(BinDirConfiguration)\Runtime\Full\AsmOffsets.cs" />
+    -->
+    <Compile Condition="'$(Platform)'!='wasm'" Include="..\..\..\AsmOffsets.cs" />
     <Compile Condition="'$(Platform)'=='wasm'" Include="$(BaseIntermediateOutputPath)\Native\$(BinDirOSGroup).$(BinDirPlatform).$(BinDirConfiguration)\Runtime\Portable\AsmOffsetsPortable.cs" />
   </ItemGroup>
   <ItemGroup>

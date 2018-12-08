@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using HashHelpers = System.Numerics.Hashing.HashHelpers;
 #if MONO
-using System.Diagnostics.Private;
+// using System.Diagnostics.Private;
 #endif
 
 namespace System

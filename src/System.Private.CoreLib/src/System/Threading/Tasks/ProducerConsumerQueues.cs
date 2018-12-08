@@ -90,6 +90,10 @@ namespace System.Threading.Tasks
         /// <summary>A thread-safe way to get the number of items in the collection. May synchronize access by locking the provided synchronization object.</summary>
         /// <remarks>ConcurrentQueue.Count is thread safe, no need to acquire the lock.</remarks>
         int IProducerConsumerQueue<T>.GetCountSafe(object syncObj) { return base.Count; }
+
+#if MONO48
+        IEnumerator IEnumerable.GetEnumerator() => throw new System.NotImplemented();
+#endif
     }
 
     /// <summary>
@@ -146,11 +150,12 @@ namespace System.Threading.Tasks
         internal SingleProducerSingleConsumerQueue()
         {
             // Validate constants in ctor rather than in an explicit cctor that would cause perf degradation
+#if !MONO
             Debug.Assert(INIT_SEGMENT_SIZE > 0, "Initial segment size must be > 0.");
             Debug.Assert((INIT_SEGMENT_SIZE & (INIT_SEGMENT_SIZE - 1)) == 0, "Initial segment size must be a power of 2");
             Debug.Assert(INIT_SEGMENT_SIZE <= MAX_SEGMENT_SIZE, "Initial segment size should be <= maximum.");
             Debug.Assert(MAX_SEGMENT_SIZE < Int32.MaxValue / 2, "Max segment size * 2 must be < Int32.MaxValue, or else overflow could occur.");
-
+#endif
             // Initialize the queue
             m_head = m_tail = new Segment(INIT_SEGMENT_SIZE);
         }
@@ -179,8 +184,10 @@ namespace System.Threading.Tasks
         /// <param name="segment">The segment in which to first attempt to store the item.</param>
         private void EnqueueSlow(T item, ref Segment segment)
         {
-            Debug.Assert(segment != null, "Expected a non-null segment.");
 
+#if !MONO
+            Debug.Assert(segment != null, "Expected a non-null segment.");
+#endif
             if (segment.m_state.m_firstCopy != segment.m_state.m_first)
             {
                 segment.m_state.m_firstCopy = segment.m_state.m_first;
@@ -189,7 +196,9 @@ namespace System.Threading.Tasks
             }
 
             int newSegmentSize = m_tail.m_array.Length << 1; // double size
+#if !MONO
             Debug.Assert(newSegmentSize > 0, "The max size should always be small enough that we don't overflow.");
+#endif
             if (newSegmentSize > MAX_SEGMENT_SIZE) newSegmentSize = MAX_SEGMENT_SIZE;
 
             var newSegment = new Segment(newSegmentSize);
@@ -293,9 +302,10 @@ namespace System.Threading.Tasks
         /// <returns>true if an item could be peeked; otherwise, false.</returns>
         private bool TryPeekSlow(ref Segment segment, ref T[] array, out T result)
         {
+#if !MONO
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
-
+#endif
             if (segment.m_state.m_last != segment.m_state.m_lastCopy)
             {
                 segment.m_state.m_lastCopy = segment.m_state.m_last;

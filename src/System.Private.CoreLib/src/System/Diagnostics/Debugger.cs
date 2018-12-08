@@ -27,7 +27,8 @@ namespace System.Diagnostics
 
         public static bool Launch()
         {
-            throw new PlatformNotSupportedException();
+            // throw new PlatformNotSupportedException();
+            return false;
         }
 
         public static void NotifyOfCrossThreadDependency()

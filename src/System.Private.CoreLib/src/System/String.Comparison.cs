@@ -22,7 +22,7 @@ namespace System
         //
         //Native Static Methods
         //
-#if !MONO
+#if !MONO48
         private static unsafe int FastCompareStringHelper(uint* strAChars, int countA, uint* strBChars, int countB)
         {
             int count = (countA < countB) ? countA : countB;
@@ -1057,7 +1057,7 @@ namespace System
         // they will return the same hash code.
         public override int GetHashCode()
         {
-#if MONO
+#if MONO48
             return LegacyStringGetHashCode();
 #else
             return Marvin.ComputeHash32(ref Unsafe.As<char, byte>(ref _firstChar), _stringLength * 2, Marvin.DefaultSeed);

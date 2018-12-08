@@ -191,7 +191,7 @@ namespace System.Threading
 
                 if (id < 0 || !m_initialized)
                 {
-                    Debug.Assert(id >= 0 || !m_initialized, "expected id >= 0 if initialized");
+                    System.Diagnostics.Private.Debug.Assert(id >= 0 || !m_initialized, "expected id >= 0 if initialized");
 
                     // Handle double Dispose calls or disposal of an instance whose constructor threw an exception.
                     return;
@@ -548,7 +548,7 @@ namespace System.Threading
         /// </summary>
         private void GrowTable(ref LinkedSlotVolatile[] table, int minLength)
         {
-            Debug.Assert(table.Length < minLength);
+            System.Diagnostics.Private.Debug.Assert(table.Length < minLength);
 
             // Determine the size of the new table and allocate it.
             int newLen = GetNewTableSize(minLength);
@@ -588,7 +588,7 @@ namespace System.Threading
                 // Intentionally return a value that will result in an OutOfMemoryException
                 return int.MaxValue;
             }
-            Debug.Assert(minSize > 0);
+           System.Diagnostics.Private.Debug.Assert(minSize > 0);
 
             //
             // Round up the size to the next power of 2
@@ -739,7 +739,7 @@ namespace System.Threading
             ~FinalizationHelper()
             {
                 LinkedSlotVolatile[] slotArray = SlotArray;
-                Debug.Assert(slotArray != null);
+                System.Diagnostics.Private.Debug.Assert(slotArray != null);
 
                 for (int i = 0; i < slotArray.Length; i++)
                 {
@@ -767,7 +767,7 @@ namespace System.Threading
                             }
 
                             // Since the list uses a dummy head node, the Previous reference should never be null.
-                            Debug.Assert(linkedSlot.Previous != null);
+                            System.Diagnostics.Private.Debug.Assert(linkedSlot.Previous != null);
                             linkedSlot.Previous.Next = linkedSlot.Next;
                         }
                     }

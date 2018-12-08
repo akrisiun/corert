@@ -147,6 +147,17 @@ namespace System
             }
         }
 
+        public static bool IsRunningOnWindows 
+        {
+            get =>
+#if !PLATFORM_UNIX
+                true;
+#else
+                false;
+#endif // !PLATFORM_UNIX
+
+        }
+
         public static String StackTrace
         {
             // Disable inlining to have predictable stack frame that EnvironmentAugments can skip

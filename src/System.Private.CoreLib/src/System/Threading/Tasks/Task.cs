@@ -2420,7 +2420,7 @@ namespace System.Threading.Tasks
             return true;
         }
 
-#if !MONO
+#if !MONO48
         // A trick so we can refer to the TLS slot with a byref.
         private void ExecuteWithThreadLocal(ref Task currentTaskSlot)
         {

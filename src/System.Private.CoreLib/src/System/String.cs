@@ -82,7 +82,9 @@ namespace System
         // declared constructors.
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.Char[])")]
+#endif
         public extern String(char[] value);
 
         [System.Runtime.CompilerServices.DependencyReductionRoot]
@@ -106,7 +108,9 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.Char[], System.Int32, System.Int32)")]
+#endif
         public extern String(char[] value, int startIndex, int length);
 
         [System.Runtime.CompilerServices.DependencyReductionRoot]
@@ -143,7 +147,9 @@ namespace System
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.Char*)")]
+#endif
         unsafe public extern String(char* value);
 
         [System.Runtime.CompilerServices.DependencyReductionRoot]
@@ -176,7 +182,9 @@ namespace System
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.Char*, System.Int32, System.Int32)")]
+#endif
         unsafe public extern String(char* value, int startIndex, int length);
 
         [System.Runtime.CompilerServices.DependencyReductionRoot]
@@ -218,7 +226,9 @@ namespace System
 
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.SByte*)")]
+#endif
         public extern unsafe String(sbyte* value);
 
         [DependencyReductionRoot]
@@ -237,7 +247,9 @@ namespace System
 
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.SByte*, System.Int32, System.Int32)")]
+#endif
         public extern unsafe String(sbyte* value, int startIndex, int length);
 
         [DependencyReductionRoot]
@@ -264,8 +276,10 @@ namespace System
         // Encoder for String..ctor(sbyte*) and String..ctor(sbyte*, int, int). One of the last bastions of ANSI in the framework...
         private static unsafe string CreateStringForSByteConstructor(byte *pb, int numBytes)
         {
+#if !MONO
             Debug.Assert(numBytes >= 0);
             Debug.Assert(pb <= (pb + numBytes));
+#endif
 
             if (numBytes == 0)
                 return string.Empty;
@@ -290,7 +304,9 @@ namespace System
 
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.SByte*, System.Int32, System.Int32, System.Text.Encoding)")]
+#endif
         public extern unsafe String(sbyte* value, int startIndex, int length, Encoding enc);
 
         [DependencyReductionRoot]
@@ -336,7 +352,9 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO // #endif
         [PreserveDependency("System.String.CreateString(System.Char, System.Int32)")]
+#endif
         public extern String(char c, int count);
 
         [System.Runtime.CompilerServices.DependencyReductionRoot]
@@ -384,7 +402,9 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+#if !MONO
         [PreserveDependency("System.String.CreateString(System.ReadOnlySpan`1<System.Char>)")]
+#endif
         public extern String(ReadOnlySpan<char> value);
 
         [DependencyReductionRoot]
@@ -560,12 +580,15 @@ namespace System
         unsafe internal static String CreateStringFromEncoding(
             byte* bytes, int byteLength, Encoding encoding)
         {
+#if !MONO
             Debug.Assert(bytes != null);
             Debug.Assert(byteLength >= 0);
-
+#endif
             // Get our string length
             int stringLength = encoding.GetCharCount(bytes, byteLength, null);
+#if !MONO
             Debug.Assert(stringLength >= 0, "stringLength >= 0");
+#endif
 
             // They gave us an empty string if they needed one
             // 0 bytelength might be possible if there's something in an encoder
@@ -576,8 +599,10 @@ namespace System
             fixed (char* pTempChars = &s._firstChar)
             {
                 int doubleCheck = encoding.GetChars(bytes, byteLength, pTempChars, stringLength, null);
+#if !MONO
                 Debug.Assert(stringLength == doubleCheck,
                     "Expected encoding.GetChars to return same length as encoding.GetCharCount");
+#endif
             }
 
             return s;
@@ -711,8 +736,10 @@ namespace System
 #endif // !BIT64
 
             FoundZero:
-            Debug.Assert(*end == 0);
 
+#if !MONO
+            Debug.Assert(*end == 0);
+#endif
             int count = (int)(end - ptr);
 
             return count;
@@ -826,7 +853,7 @@ namespace System
     }
 }
 
-#if MONO
+#if MONO46
 
 namespace System.Buffers
 {
