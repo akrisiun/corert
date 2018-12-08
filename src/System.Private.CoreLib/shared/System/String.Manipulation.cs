@@ -1162,7 +1162,7 @@ namespace System
 #if FEATURE_PORTABLE_SPAN
             var srcSpan = new ReadOnlySpan<char>(Unsafe.As<Pinnable<char>>(separator), IntPtr.Zero, 1);
 #else
-            var srcSpan = new ReadOnlySpan<char>(ref separator, 1)
+            var srcSpan = new ReadOnlySpan<char>(ref separator, 1);
 #endif
 
             return SplitInternal(srcSpan, int.MaxValue, options);
@@ -1173,7 +1173,7 @@ namespace System
 #if FEATURE_PORTABLE_SPAN
             var srcSpan = new ReadOnlySpan<char>(Unsafe.As<Pinnable<char>>(separator), IntPtr.Zero, 1);
 #else
-            var srcSpan = new ReadOnlySpan<char>(ref separator, 1)
+            var srcSpan = new ReadOnlySpan<char>(ref separator, 1);
 #endif
 
             return SplitInternal(srcSpan, count, options);

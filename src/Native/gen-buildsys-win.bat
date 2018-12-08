@@ -5,6 +5,8 @@ rem This file invokes cmake and generates the build system for windows.
 set argC=0
 for %%x in (%*) do Set /A argC+=1
 
+echo "argC = %argC% == 4 ?"
+
 if NOT %argC%==4 GOTO :USAGE
 if %1=="/?" GOTO :USAGE
 
@@ -33,6 +35,7 @@ GOTO :DONE
 :USAGE
   echo "Usage..."
   echo "gen-buildsys-win.bat <path to top level CMakeLists.txt> <VSVersion>"
+  echo "like: gen-buildsys-win.bat . VS2017 x64 Debug"
   echo "Specify the path to the top level CMake file - <corert>/src/Native"
   echo "Specify the VSVersion to be used - VS2017"
   echo "Specify the build type (Debug, Release)"

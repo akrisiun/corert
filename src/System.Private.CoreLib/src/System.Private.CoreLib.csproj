@@ -14,14 +14,7 @@
     <IsDotNetFrameworkProductAssembly>true</IsDotNetFrameworkProductAssembly>
   </PropertyGroup>
   <!-- Default configurations to help VS understand the options -->
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|arm'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|arm'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|arm64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|arm64'" />
   <PropertyGroup>
     <ExcludeMscorlibFacade>true</ExcludeMscorlibFacade>
     <ExcludeAssemblyInfoPartialFile>true</ExcludeAssemblyInfoPartialFile>

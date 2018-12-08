@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4CDEA646-549A-33B4-8189-92637ECA3B44}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>PortableRuntime</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PortableRuntime.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PortableRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PortableRuntime.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PortableRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">PortableRuntime.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">PortableRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">PortableRuntime.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">PortableRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Common;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /source-charset:utf-8</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;FEATURE_GC_STRESS;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;DEBUG;FEATURE_GC_STRESS;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;FEATURE_GC_STRESS;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IncludePaths>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe" -D_TARGET_AMD64_=1 -D_AMD64_ -DBIT64=1 -DUNICODE=1 -DFEATURE_BACKGROUND_GC -DFEATURE_SVR_GC -DFEATURE_BASICFREEZE -DFEATURE_CONSERVATIVE_GC -DFEATURE_CUSTOM_IMPORTS -DFEATURE_DYNAMIC_CODE -DFEATURE_REDHAWK -DVERIFY_HEAP -DCORERT -DFEATURE_CACHED_INTERFACE_DISPATCH -D_LIB -DEETYPE_TYPE_MANAGER -DSTRESS_HEAP -DUSE_PORTABLE_HELPERS -EP -I"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/amd64" E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/../../Runtime.Base/src/AsmOffsets.cspp &gt;"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/AsmOffsetsPortable.cs"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Common;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /source-charset:utf-8</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IncludePaths>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe" -D_TARGET_AMD64_=1 -D_AMD64_ -DBIT64=1 -DUNICODE=1 -DFEATURE_BACKGROUND_GC -DFEATURE_SVR_GC -DFEATURE_BASICFREEZE -DFEATURE_CONSERVATIVE_GC -DFEATURE_CUSTOM_IMPORTS -DFEATURE_DYNAMIC_CODE -DFEATURE_REDHAWK -DVERIFY_HEAP -DCORERT -DFEATURE_CACHED_INTERFACE_DISPATCH -D_LIB -DEETYPE_TYPE_MANAGER -DSTRESS_HEAP -DUSE_PORTABLE_HELPERS -EP -I"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/amd64" E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/../../Runtime.Base/src/AsmOffsets.cspp &gt;"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/AsmOffsetsPortable.cs"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Common;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /source-charset:utf-8</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IncludePaths>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe" -D_TARGET_AMD64_=1 -D_AMD64_ -DBIT64=1 -DUNICODE=1 -DFEATURE_BACKGROUND_GC -DFEATURE_SVR_GC -DFEATURE_BASICFREEZE -DFEATURE_CONSERVATIVE_GC -DFEATURE_CUSTOM_IMPORTS -DFEATURE_DYNAMIC_CODE -DFEATURE_REDHAWK -DVERIFY_HEAP -DCORERT -DFEATURE_CACHED_INTERFACE_DISPATCH -D_LIB -DEETYPE_TYPE_MANAGER -DSTRESS_HEAP -DUSE_PORTABLE_HELPERS -EP -I"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/amd64" E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/../../Runtime.Base/src/AsmOffsets.cspp &gt;"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/AsmOffsetsPortable.cs"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Common;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /source-charset:utf-8</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <MASM>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_TARGET_AMD64_=1;_AMD64_;BIT64=1;UNICODE=1;FEATURE_BACKGROUND_GC;FEATURE_SVR_GC;FEATURE_BASICFREEZE;FEATURE_CONSERVATIVE_GC;FEATURE_CUSTOM_IMPORTS;FEATURE_DYNAMIC_CODE;FEATURE_REDHAWK;VERIFY_HEAP;CORERT;FEATURE_CACHED_INTERFACE_DISPATCH;_LIB;EETYPE_TYPE_MANAGER;STRESS_HEAP;USE_PORTABLE_HELPERS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IncludePaths>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(IncludePaths)</IncludePaths>
+    </MASM>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\inc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\amd64;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\..\..\gc\env;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe" -D_TARGET_AMD64_=1 -D_AMD64_ -DBIT64=1 -DUNICODE=1 -DFEATURE_BACKGROUND_GC -DFEATURE_SVR_GC -DFEATURE_BASICFREEZE -DFEATURE_CONSERVATIVE_GC -DFEATURE_CUSTOM_IMPORTS -DFEATURE_DYNAMIC_CODE -DFEATURE_REDHAWK -DVERIFY_HEAP -DCORERT -DFEATURE_CACHED_INTERFACE_DISPATCH -D_LIB -DEETYPE_TYPE_MANAGER -DSTRESS_HEAP -DUSE_PORTABLE_HELPERS -EP -I"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/amd64" E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/../../Runtime.Base/src/AsmOffsets.cspp &gt;"E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/AsmOffsetsPortable.cs"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/mono08/external/corert/src/Native -BE:/Beta/dot64/mono08/external/corert/src/Native --check-stamp-file E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/mono08/external/corert/src/Native -BE:/Beta/dot64/mono08/external/corert/src/Native --check-stamp-file E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/mono08/external/corert/src/Native -BE:/Beta/dot64/mono08/external/corert/src/Native --check-stamp-file E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Beta/dot64/mono08/external/corert/src/Native -BE:/Beta/dot64/mono08/external/corert/src/Native --check-stamp-file E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/Beta/dot64/mono08/external/corert/src/Native/Runtime/Portable/CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Portable\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\allocheap.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\rhassert.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\CachedInterfaceDispatch.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\Crst.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\DebugEventSource.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\DebugFuncEval.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\DebuggerHook.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\eetype.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\EHHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\event.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\FinalizerHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\GCHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\gcheaputilities.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\GCMemoryHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\gcrhenv.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\gcrhscan.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\GcStressControl.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\GenericUnification.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\HandleTableHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\MathHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\MiscHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\TypeManager.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\ObjectLayout.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\OptionalFieldsRuntime.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\portable.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\profheapwalkhelper.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\RestrictedCallouts.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\RhConfig.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\RuntimeInstance.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\RWLock.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\SectionMethodList.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\sha1.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\StackFrameIterator.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\startup.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\stressLog.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\strongname.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\SyncClean.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\thread.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\threadstore.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\UniversalTransitionHelpers.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gccommon.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gceewks.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gcwks.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gceesvr.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gcsvr.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\gcscan.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\handletable.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\handletablecache.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\handletablecore.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\handletablescan.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\gc\objecthandle.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows\PalRedhawkCommon.cpp" />
+    <ClCompile Include="E:\Beta\dot64\mono08\external\corert\src\Native\Runtime\windows\PalRedhawkMinWin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\Beta\dot64\mono08\external\corert\src\Native\ZERO_CHECK.vcxproj">
+      <Project>{C22BBACD-B270-3974-8493-7E3C3792CC56}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

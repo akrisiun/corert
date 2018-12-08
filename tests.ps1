@@ -1,0 +1,2 @@
+
+tests\runtest.cmd /corefx

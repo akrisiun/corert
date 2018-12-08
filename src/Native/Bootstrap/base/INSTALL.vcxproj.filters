@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Beta\dot64\mono08\external\corert\src\Native\CMakeFiles\5f199aed77ec9adcfdff1dac3caae92b\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9EE7763E-66DF-395D-94E2-375B74CCE4EE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
