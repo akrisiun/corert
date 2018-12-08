@@ -127,8 +127,13 @@ namespace ILCompiler.Metadata
         }
     }
 
+    // Transform.Namespace.cs(130,21): error CA2231: Overload operator equals on overriding ValueType.Equals
+#pragma warning disable CA2231
+
     internal struct NamespaceKey : IEquatable<NamespaceKey>
     {
+        // override bool Equals(object obj);
+
         public readonly Cts.ModuleDesc Module;
         public readonly string Namespace;
 
