@@ -26,6 +26,8 @@ namespace System
             throw new NotSupportedException();
         }
 
+        public IntPtr ValuePtr { get => _value; }
+
         public ref T Value
         {
             [Intrinsic]
